@@ -12,21 +12,37 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Productos</title>
+        <script type="text/javascript">
+            
+            window.onload = function () {
+                
+            };
+            function seleccionar(codigo,nombre,precio,tipo){
+                txtId = document.getElementById("txtId");
+                txtNombre = document.getElementById("txtNombre");
+                txtPrecio = document.getElementById("txtPrecio");
+                cmbTipo = document.getElementById("cmbTipo");
+                txtId.value = codigo;
+                txtNombre.value = nombre;
+                txtPrecio.value = precio;
+                cmbTipo.value = tipo;
+            }
+        </script>
     </head>
     <body>
-        <h1>Agregar Producto</h1>
+        <h1>Productos</h1>
         
         <form action="/VendoTodo/AgregarProducto" method="POST">
             <table border="0">       
                 <tbody>
                     <tr>
                         <td>Nombre</td>
-                        <td><input type="text" name="txtNombre" value="" /></td>
+                        <td><input type="text" name="txtNombre" value="" id="txtNombre"/></td>
                     </tr>
                     <tr>
                         <td>Tipo Producto</td>
-                        <td><select name="cmbTipo">
+                        <td><select name="cmbTipo" id="cmbTipo">
                         <% ArrayList<TipoDto> tipos = (ArrayList<TipoDto>) request.getAttribute("tipos");
                         if (tipos != null) {
                             for (TipoDto tipo : tipos) {
@@ -40,11 +56,11 @@
                     </tr>
                     <tr>
                         <td>Precio</td>
-                        <td><input type="text" name="txtPrecio" value="" /></td>
+                        <td><input type="text" name="txtPrecio" value="" id="txtPrecio"/></td>
                     </tr>
                     <tr>
                         <td>ID</td>
-                        <td><input type="text" name="txtId" value="" disabled = "true"/></td>
+                        <td><input type="text" name="txtId" value="" readonly="true" id="txtId"/></td>
                     </tr>
                 </tbody>
             </table><br>
@@ -72,6 +88,7 @@
                        <th>Precio</th>
                        <th>Codigo Tipo</th>
                        <th>Eliminar</th>
+                       <th>Seleccionar</th>
                 </tr>
             </thead>
             <tbody>
@@ -82,6 +99,8 @@
                     <td><%= dto.getPrecioProducto()%></td>
                     <td><%= dto.getCodigoTipo()%></td>
                     <td><button type="submit" value="<%= dto.getCodigoProducto()%>" name="btnEliminar">Eliminar</button></td>
+                    <td><button type="button" onclick='seleccionar(<%= dto.getCodigoProducto()%>,"<%= dto.getNombreProducto().replace("\"", "\\\"")%>",<%= dto.getPrecioProducto()%>,<%= dto.getCodigoTipo()%>)'>Seleccionar</button></td>
+                    
                 </tr>
                 <% } %>  
             </tbody>
