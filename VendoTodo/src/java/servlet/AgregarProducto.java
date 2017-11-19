@@ -38,42 +38,105 @@ public class AgregarProducto extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        request.setAttribute("tipos", new TipoDaoImp().listar());
         if ("GET".equals(request.getMethod())) {
-            ArrayList<TipoDto> tipos = new TipoDaoImp().listar();
-            request.setAttribute("tipos", tipos);
             request.getRequestDispatcher(
                     "paginas/agregarProducto.jsp").
                     forward(request, response);
             return;
         }
         response.setContentType("text/html;charset=UTF-8");
+
+        String eliminar = request.getParameter("btnEliminar");
+        if (eliminar != null) {
+            String mensaje = "";
+            try {
+
+                int id = Integer.parseInt(eliminar);
+                if (new ProductoDaoImp().eliminar(id)) {
+                    mensaje = "REGISTRO ELIMINADO!!";
+                } else {
+                    mensaje = "NO SE PUDO ELIMINAR!!";
+                }
+            } catch (NumberFormatException e) {
+                mensaje = "Error! el id debe ser numérico";
+            }
+            if (!mensaje.isEmpty()) {
+                request.setAttribute("msg", mensaje);
+            }
+            ArrayList<ProductoDto> lista = new ProductoDaoImp().listar();
+            if (!lista.isEmpty()) {
+                request.setAttribute("lista", lista);
+            }
+            request.getRequestDispatcher(
+                    "paginas/agregarProducto.jsp").
+                    forward(request, response);
+            return;
+        }
         try (PrintWriter out = response.getWriter()) {
             String mensaje = "";
 
             String txtNombre = request.getParameter("txtNombre").trim();
             String txtPrecio = request.getParameter("txtPrecio").trim();
-
-            if (txtNombre.isEmpty() || txtPrecio.isEmpty()) {
-                mensaje = "No se ha podido crear usuario verifique se hayan ingresado todos los datos";
-            } else {
-
-                try {
-                    ProductoDto dto = new ProductoDto();
-
-                    dto.setNombreProducto(txtNombre);
-                    dto.setPrecioProducto(Integer.parseInt(txtPrecio));
-                    dto.setCodigoTipo(Integer.parseInt(request.getParameter("cmbTipo")));
-                    if (new ProductoDaoImp().agregar(dto)) {
-                        mensaje = "REGISTRO GRABADO!!";
+            int cmbTipo = Integer.parseInt(request.getParameter("cmbTipo"));
+            String txtId = request.getParameter("txtId");
+            String boton = request.getParameter("btn").trim();
+            switch (boton) {
+                case "Grabar":
+                    if (txtNombre.isEmpty() || txtPrecio.isEmpty()) {
+                        mensaje = "No se ha podido crear usuario verifique se hayan ingresado todos los datos";
                     } else {
-                        mensaje = "NO SE GRABO!!";
+
+                        try {
+                            ProductoDto dto = new ProductoDto();
+
+                            dto.setNombreProducto(txtNombre);
+                            dto.setPrecioProducto(Integer.parseInt(txtPrecio));
+                            dto.setCodigoTipo(cmbTipo);
+                            if (new ProductoDaoImp().agregar(dto)) {
+                                mensaje = "REGISTRO GRABADO!!";
+                            } else {
+                                mensaje = "NO SE GRABO!!";
+                            }
+                        } catch (NumberFormatException e) {
+                            mensaje = "Error! el precio debe ser numérico";
+                        }
                     }
-                } catch (NumberFormatException e) {
-                    mensaje = "Error! el precio debe ser numérico";
-                }
+                    break;
+                case "Actualizar":
+                    if (txtNombre.isEmpty() || txtPrecio.isEmpty() || txtId.isEmpty()) {
+                        mensaje = "No se ha podido modificar usuario verifique se hayan ingresado todos los datos";
+                    } else {
+
+                        try {
+                            ProductoDto dto = new ProductoDto();
+                            dto.setCodigoProducto(Integer.parseInt(txtId));
+                            dto.setNombreProducto(txtNombre);
+                            dto.setPrecioProducto(Integer.parseInt(txtPrecio));
+                            dto.setCodigoTipo(cmbTipo);
+                            if (new ProductoDaoImp().modificar(dto)) {
+                                mensaje = "REGISTRO ACTUALIZADO!!";
+                            } else {
+                                mensaje = "NO SE PUDO ACTUALIZAR!!";
+                            }
+                        } catch (NumberFormatException e) {
+                            mensaje = "Error! el precio debe ser numérico";
+                        }
+                    }
+                    break;
+                case "Mostrar":
+                    ArrayList<ProductoDto> lista = new ProductoDaoImp().listar();
+                    if (!lista.isEmpty()) {
+                        request.setAttribute("lista", lista);
+                    }
+                    break;
+                default:
+                    throw new AssertionError();
             }
-            request.setAttribute("msg", mensaje);
-            request.setAttribute("tipos", new TipoDaoImp().listar());
+
+            if (!mensaje.isEmpty()) {
+                request.setAttribute("msg", mensaje);
+            }
             request.getRequestDispatcher(
                     "paginas/agregarProducto.jsp").
                     forward(request, response);
