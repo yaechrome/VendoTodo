@@ -41,7 +41,7 @@
     <body>
         <h1>Usuarios</h1>
         
-        <form action="/VendoTodo/AgregarUsuario" method="POST">
+        <form action="<%= request.getContextPath()%>/AgregarUsuario" method="POST">
             <table border="0">       
                 <tbody>
                     <tr>

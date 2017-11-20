@@ -42,12 +42,12 @@ public class UsuarioDaoImp implements UsuarioDao {
     
 
     @Override
-    public boolean ValidarPassword(UsuarioDto usuario, String pass) {
+    public boolean ValidarPassword(String login, String pass) {
         try {
             Connection conexion = Conexion.getConexion();
-            String query = "select pass_usuario from usuarios where id_usuario = ?";
+            String query = "select pass_usuario from usuarios where login_usuario = ?";
             PreparedStatement buscar = conexion.prepareStatement(query);
-            buscar.setInt(1, usuario.getIdUsuario());
+            buscar.setString(1, login);
             buscar.execute();
 
             try (ResultSet rs = buscar.executeQuery()) {
@@ -103,23 +103,23 @@ public class UsuarioDaoImp implements UsuarioDao {
         try {
 
             Connection conexion = Conexion.getConexion();
-            String query1= "SET FOREIGN_KEY_CHECKS=0";
+            String query1 = "SET FOREIGN_KEY_CHECKS=0";
             String query2 = "DELETE FROM usuarios WHERE id_usuario=?";
             String query3 = "SET FOREIGN_KEY_CHECKS=1";
-            PreparedStatement  eliminarFK = conexion.prepareStatement(query1);
+            PreparedStatement eliminarFK = conexion.prepareStatement(query1);
             PreparedStatement eliminar = conexion.prepareStatement(query2);
             PreparedStatement agregarFK = conexion.prepareStatement(query3);
 
             eliminarFK.execute();
             eliminarFK.close();
-            
+
             eliminar.setInt(1, codigo);
             eliminar.execute();
             eliminar.close();
-            
+
             agregarFK.execute();
             agregarFK.close();
-             
+
             conexion.close();
             return true;
         } catch (SQLException w) {
@@ -222,27 +222,27 @@ public class UsuarioDaoImp implements UsuarioDao {
         }
         return lista;
     }
-    
+
     @Override
     public String Encriptar(String texto) {
         String secretKey = "qualityinfosolutions"; //llave para encriptar datos
         String base64EncryptedString = "";
- 
+
         try {
- 
+
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] digestOfPassword = md.digest(secretKey.getBytes("utf-8"));
             byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
- 
+
             SecretKey key = new SecretKeySpec(keyBytes, "DESede");
             Cipher cipher = Cipher.getInstance("DESede");
             cipher.init(Cipher.ENCRYPT_MODE, key);
- 
+
             byte[] plainTextBytes = texto.getBytes("utf-8");
             byte[] buf = cipher.doFinal(plainTextBytes);
             byte[] base64Bytes = Base64.encodeBase64(buf);
             base64EncryptedString = new String(base64Bytes);
- 
+
         } catch (Exception ex) {
         }
         return base64EncryptedString;
@@ -253,24 +253,56 @@ public class UsuarioDaoImp implements UsuarioDao {
     public String Desencriptar(String textoEncriptado) {
         String secretKey = "qualityinfosolutions"; //llave para encriptar datos
         String base64EncryptedString = "";
- 
+
         try {
             byte[] message = Base64.decodeBase64(textoEncriptado.getBytes("utf-8"));
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] digestOfPassword = md.digest(secretKey.getBytes("utf-8"));
             byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
             SecretKey key = new SecretKeySpec(keyBytes, "DESede");
- 
+
             Cipher decipher = Cipher.getInstance("DESede");
             decipher.init(Cipher.DECRYPT_MODE, key);
- 
+
             byte[] plainText = decipher.doFinal(message);
- 
+
             base64EncryptedString = new String(plainText, "UTF-8");
- 
+
         } catch (Exception ex) {
         }
         return base64EncryptedString;
+    }
+
+    @Override
+    public UsuarioDto BuscarUsuario(String login) {
+        UsuarioDto dto = new UsuarioDto();
+        try {
+            Connection conexion = Conexion.getConexion();
+            String query = "SELECT * FROM usuarios where login_usuario = ?";
+            PreparedStatement buscar = conexion.prepareStatement(query);
+            buscar.setString(1, login);
+            ResultSet rs = buscar.executeQuery();
+
+            if(rs.next()) {
+                
+                dto.setIdUsuario(rs.getInt("id_usuario"));
+                dto.setLoginUsuario(rs.getString("login_usuario"));
+                dto.setPassUsuario(rs.getString("pass_usuario"));
+                dto.setNombreUsuario(rs.getString("nombre_usuario"));
+                dto.setApellidoUsuario(rs.getString("apellido_usuario"));
+                dto.setCorreoUsuario(rs.getString("correo_usuario"));
+                dto.setCodigoPerfil(rs.getInt("codigo_perfil"));
+                
+            }
+            buscar.close();
+            conexion.close();
+           
+        } catch (SQLException w) {
+            System.out.println("Error SQL al buscar " + w.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error al buscar " + e.getMessage());
+        }
+        return dto;
     }
 
 }
