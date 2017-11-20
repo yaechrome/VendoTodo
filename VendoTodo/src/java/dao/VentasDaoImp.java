@@ -148,11 +148,11 @@ public class VentasDaoImp implements VentasDao {
         String mensaje = "";
         try {
             Connection conexion = Conexion.getConexion();
-            String query = "SELECT login_usuario , MAX(Total) FROM (SELECT login_usuario, COUNT(codigo_venta) AS Total from usuarios join ventas on ventas.codigo_vendedor = usuarios.id_usuario group by codigo_vendedor) as maximo";
+            String query = "SELECT login_usuario, COUNT(codigo_venta) AS Total from usuarios join ventas on ventas.codigo_vendedor = usuarios.id_usuario group by codigo_vendedor order by Total desc limit 1";
             PreparedStatement buscar = conexion.prepareStatement(query);
             ResultSet rs = buscar.executeQuery();
             if (rs.next()) {
-                mensaje = mensaje + "El vendedor " + rs.getString("login_usuario") + " realizó " + rs.getInt("MAX(Total)") + " ventas. \n";
+                mensaje = mensaje + "El vendedor " + rs.getString("login_usuario") + " realizó " + rs.getInt("Total") + " ventas. \n";
             }
 
         } catch (Exception e) {

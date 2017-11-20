@@ -1,13 +1,13 @@
 # ************************************************************
 # Sequel Pro SQL dump
-# VersiÃƒÆ’Ã‚Â³n 4541
+# Versión 4541
 #
 # http://www.sequelpro.com/
 # https://github.com/sequelpro/sequelpro
 #
 # Host: 127.0.0.1 (MySQL 5.7.19)
 # Base de datos: veta
-# Tiempo de GeneraciÃƒÆ’Ã‚Â³n: 2017-11-12 8:50:45 p.m. +0000
+# Tiempo de Generación: 2017-11-12 8:50:45 p.m. +0000
 # ************************************************************
 
 

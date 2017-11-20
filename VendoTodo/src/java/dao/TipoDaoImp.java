@@ -51,14 +51,12 @@ public class TipoDaoImp implements TipoDao{
         String nombre = "";
         try {
             Connection conexion = Conexion.getConexion();
-            String query = "SELECT codigo_tipo , MAX(Total) FROM (SELECT codigo_tipo, COUNT(codigo_tipo) AS Total \n"
-                    + "from detalle_venta join producto on detalle_venta.codigo_producto = producto.codigo_producto\n"
-                    + "group by codigo_Tipo) as maximo";
+            String query = "SELECT codigo_tipo, COUNT(codigo_tipo) AS Total FROM detalle_venta JOIN producto ON detalle_venta.codigo_producto = producto.codigo_producto GROUP BY codigo_Tipo ORDER BY Total Desc LIMIT 1";
             PreparedStatement buscar = conexion.prepareStatement(query);
             ResultSet rs = buscar.executeQuery();
             if (rs.next()) {
                 nombre = BuscarNombreTipo(rs.getInt("codigo_tipo"));
-                mensaje = mensaje + "El tipo " + nombre + " fue el más vendido, con " + rs.getInt("MAX(Total)") + " ventas. \n";
+                mensaje = mensaje + "El tipo " + nombre + " fue el más vendido, con " + rs.getInt("Total") + " ventas. \n";
             }
 
         } catch (SQLException w) {
