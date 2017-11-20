@@ -8,12 +8,11 @@
     </head>
     <body>
         <header>
-            <h1>Autenticación</h1>
         </header>
 
         <section>
             <div class="login-form">
-                <h2>Login</h2>          
+                <h1 style="text-align: center;">Autenticación</h1>          
                 <form action="<%= request.getContextPath()%>/Login" method="POST">
                     <fieldset>
                         <legend>Credenciales de usuario</legend> 
@@ -28,13 +27,11 @@
 
                         <div class="form-group ">
                             <input class="form-control" type="text" name="user" required placeholder="Usuario"/>
-                            <i class="fa fa-user"></i>
                         </div>
 
 
                         <div class="form-group ">
                             <input class="form-control" type="password" name="pass" required placeholder="Password"/>
-                            <i class="fa fa-lock"></i>
                         </div>
 
                         <input class="log-btn" type="submit" name="submit" value="Ingresar" />

@@ -48,6 +48,9 @@ public class Consultas extends HttpServlet {
                 if (opcion.equals("Tipo")) {
                     respuesta = new TipoDaoImp().TipoMasVendido();
                 }
+                if(respuesta.isEmpty()){
+                    mensaje = "Venta No Existe!!";
+                }
             }
 
             if (!mensaje.isEmpty()) {
