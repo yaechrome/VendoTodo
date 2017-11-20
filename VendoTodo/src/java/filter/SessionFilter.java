@@ -63,8 +63,13 @@ public class SessionFilter implements Filter {
 
     private boolean resolvePerfil(int idPerfil, String url) {
         switch (idPerfil) {
+            case 1:
+                return true;
             case 2:
                 return validaPerfilConsulta(url);
+            case 3:
+                return validaPerfilVenta(url);
+
             default:
                 break;
         }
@@ -74,6 +79,17 @@ public class SessionFilter implements Filter {
     public boolean validaPerfilConsulta(String url) {
         switch (url) {
             case CONSULTA_URL_PAGE:
+                return true;
+            case HOME_URL_PAGE:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public boolean validaPerfilVenta(String url) {
+        switch (url) {
+            case VENTA_URL_PAGE:
                 return true;
             case HOME_URL_PAGE:
                 return true;

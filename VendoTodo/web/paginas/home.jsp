@@ -16,15 +16,14 @@
             <legend>Agregar:</legend>
             <a href="<%= request.getContextPath()%>/privado/AgregarUsuario">Usuario     </a>
             <br>
-            <a href="<%= request.getContextPath()%>/AgregarProducto">Producto   </a>
+            <a href="<%= request.getContextPath()%>/privado/AgregarProducto">Producto   </a>
             <br>
-            <a href="<%= request.getContextPath()%>/RealizarDetalleVenta">RealizarVenta     </a>
+            <a href="<%= request.getContextPath()%>/privado/RealizarDetalleVenta">RealizarVenta     </a>
             <br>
             <a href="<%= request.getContextPath()%>/privado/Consultas">Consultas     </a>
         </fieldset>
         <br>
         <br>
-        
-        <div><h1>Bienvenido!! :D</h1></div>
+        <a href="../paginas/logout.jsp">Salir</a>
     </body>
 </html>

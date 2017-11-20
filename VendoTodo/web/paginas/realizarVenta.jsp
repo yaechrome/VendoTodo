@@ -76,7 +76,7 @@
     </head>
     <body>
         
-        <form action="/VendoTodo/RealizarDetalleVenta" method="POST">
+        <form action="<%= request.getContextPath()%>/RealizarDetalleVenta" method="POST">
             
             <table border="0">
                 
@@ -103,11 +103,11 @@
                     </tr>
                     <tr>
                         <td>Cantidad: </td>
-                        <td><input type="text" name="txtCantidad" value="1" onchange="calcular()" onkeyup="calcular()" id="txtCantidad"/></td>
+                        <td><input type="number" name="txtCantidad" value="1" onchange="calcular()" onkeyup="calcular()" id="txtCantidad"/></td>
                     </tr>
                     <tr>
                         <td>Total: </td>
-                        <td><input type="text" name="txtTotal" value="" readonly="readonly" id="txtTotal" /></td>
+                        <td><input type="text" name="txtTotal" value="" readonly="readonly" id="txtTotal" disabled/></td>
                     </tr>
                 </tbody>
             </table>
