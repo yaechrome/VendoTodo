@@ -20,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static util.ConstanteUtil.USUARIO_URL_FILE;
 
 /**
  *
@@ -34,7 +35,7 @@ public class AgregarUsuario extends HttpServlet {
         if ("GET".equals(request.getMethod())) {
 
             request.getRequestDispatcher(
-                    "paginas/agregarUsuario.jsp").
+                    USUARIO_URL_FILE).
                     forward(request, response);
             return;
         }
@@ -62,7 +63,7 @@ public class AgregarUsuario extends HttpServlet {
                 request.setAttribute("lista", lista);
             }
             request.getRequestDispatcher(
-                    "paginas/agregarUsuario.jsp").
+                    USUARIO_URL_FILE).
                     forward(request, response);
             return;
         }
@@ -161,7 +162,7 @@ public class AgregarUsuario extends HttpServlet {
             }
             request.setAttribute("perfiles", new PerfilDaoImp().listar());
             request.getRequestDispatcher(
-                    "paginas/agregarUsuario.jsp").
+                    USUARIO_URL_FILE).
                     forward(request, response);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
