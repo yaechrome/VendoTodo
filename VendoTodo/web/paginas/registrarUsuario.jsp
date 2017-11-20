@@ -43,5 +43,11 @@
             <input type="submit" value="Grabar" name="btn" /> 
             <input type="reset" name="reset" value="Limpiar" />
         </form>
+             <% String mensaje = (String) request.getAttribute("msg");
+            if (mensaje != null) {  %>
+            <script>
+                alert("<%= mensaje%>");
+            </script>
+        <% } %>
     </body>
 </html>
