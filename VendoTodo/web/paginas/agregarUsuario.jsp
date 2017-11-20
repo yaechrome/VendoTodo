@@ -41,7 +41,7 @@
     <body>
         <h1>Usuarios</h1>
         
-        <form action="<%= request.getContextPath()%>/AgregarUsuario" method="POST">
+        <form action="<%= request.getContextPath()%>/privado/AgregarUsuario" method="POST">
             <table border="0">       
                 <tbody>
                     <tr>
@@ -104,7 +104,7 @@
         </script>
         <% } else {  %>
         <br>
-        <form action="/VendoTodo/AgregarUsuario" method="POST">
+        <form action="<%= request.getContextPath()%>/privado/AgregarUsuario" method="POST">
         <table border="1">
             <thead>
                 <tr>

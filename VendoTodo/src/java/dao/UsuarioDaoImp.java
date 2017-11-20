@@ -39,7 +39,29 @@ public class UsuarioDaoImp implements UsuarioDao {
         return false;
     }
 
-    
+    @Override
+    public boolean ValidarCambioLogin(int idViejo, String login) {
+        try {
+            Connection conexion = Conexion.getConexion();
+            String query = "select * from usuarios where login_usuario = ? and id <> ?";
+            PreparedStatement buscar = conexion.prepareStatement(query);
+            buscar.setString(1, login);
+            buscar.setInt(2, idViejo);
+            buscar.execute();
+            ResultSet rs = buscar.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+            buscar.close();
+            conexion.close();
+
+        } catch (SQLException w) {
+            System.out.println("Error  " + w.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
+        return false;
+    }
 
     @Override
     public boolean ValidarPassword(String login, String pass) {

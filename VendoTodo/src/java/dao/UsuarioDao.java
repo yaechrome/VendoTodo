@@ -14,6 +14,7 @@ import java.util.ArrayList;
  */
 public interface UsuarioDao extends BaseDao<UsuarioDto>{
     public boolean ValidarLogin(String login);
+    public boolean ValidarCambioLogin(int idViejo, String login);
     public boolean ValidarPassword(String login, String pass);
     public ArrayList<UsuarioDto> ListarVendedores();
     public String Encriptar(String texto);

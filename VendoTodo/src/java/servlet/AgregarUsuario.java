@@ -34,7 +34,7 @@ public class AgregarUsuario extends HttpServlet {
         if ("GET".equals(request.getMethod())) {
 
             request.getRequestDispatcher(
-                    "paginas/agregarUsuario.jsp").
+                    "/paginas/agregarUsuario.jsp").
                     forward(request, response);
             return;
         }
@@ -62,7 +62,7 @@ public class AgregarUsuario extends HttpServlet {
                 request.setAttribute("lista", lista);
             }
             request.getRequestDispatcher(
-                    "paginas/agregarUsuario.jsp").
+                    "/paginas/agregarUsuario.jsp").
                     forward(request, response);
             return;
         }
@@ -115,12 +115,12 @@ public class AgregarUsuario extends HttpServlet {
                         mensaje = "No se ha podido crear usuario verifique se hayan ingresado todos los datos";
                     } else {
 
-                        if (new UsuarioDaoImp().ValidarLogin(txtLogin)) {
+                            try {
+                                int id = Integer.parseInt(txtId);
+                        if (new UsuarioDaoImp().ValidarCambioLogin(id, txtLogin)) {
                             mensaje = "Login ya existe!";
 
                         } else {
-                            try {
-                                int id = Integer.parseInt(txtId);
                                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                                 Date dtfecha = dateFormat.parse(txtFecha);
                                 UsuarioDto dto = new UsuarioDto();
@@ -139,10 +139,10 @@ public class AgregarUsuario extends HttpServlet {
                                 } else {
                                     mensaje = "NO SE PUDO ACTUALIZAR!!";
                                 }
+                        }
                             } catch (NumberFormatException e) {
                                 mensaje = "Error! el debe ser numérico";
                             }
-                        }
                     }
 
                     break;
@@ -161,7 +161,7 @@ public class AgregarUsuario extends HttpServlet {
             }
             request.setAttribute("perfiles", new PerfilDaoImp().listar());
             request.getRequestDispatcher(
-                    "paginas/agregarUsuario.jsp").
+                    "/paginas/agregarUsuario.jsp").
                     forward(request, response);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

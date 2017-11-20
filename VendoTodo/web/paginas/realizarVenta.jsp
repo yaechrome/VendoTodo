@@ -76,7 +76,7 @@
     </head>
     <body>
         
-        <form action="<%= request.getContextPath()%>/RealizarDetalleVenta" method="POST">
+        <form action="<%= request.getContextPath()%>/privado/RealizarDetalleVenta" method="POST">
             
             <table border="0">
                 

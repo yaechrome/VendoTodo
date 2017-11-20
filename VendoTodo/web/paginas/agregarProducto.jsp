@@ -33,7 +33,7 @@
     <body>
         <h1>Productos</h1>
         
-        <form action="<%= request.getContextPath()%>/AgregarProducto" method="POST">
+        <form action="<%= request.getContextPath()%>/privado/AgregarProducto" method="POST">
             <table border="0">       
                 <tbody>
                     <tr>
@@ -78,7 +78,7 @@
         </script>
         <% } else {  %>
         <br>
-        <form action="/VendoTodo/AgregarProducto" method="POST">
+        <form action="<%= request.getContextPath()%>/privado/AgregarProducto" method="POST">
         <table border="1">
             <thead>
                 <tr>

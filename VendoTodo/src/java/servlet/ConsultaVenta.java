@@ -35,7 +35,7 @@ public class ConsultaVenta extends HttpServlet {
         if ("GET".equals(request.getMethod())) {
 
             request.getRequestDispatcher(
-                    "paginas/consulta.jsp").
+                    "/paginas/consulta.jsp").
                     forward(request, response);
             return;
         }
@@ -64,7 +64,7 @@ public class ConsultaVenta extends HttpServlet {
             if (!listaDesplegar.isEmpty()) {
                 request.setAttribute("listaDesplegar", listaDesplegar);
             }
-            request.getRequestDispatcher("paginas/consulta.jsp").forward(request, response);
+            request.getRequestDispatcher("/paginas/consulta.jsp").forward(request, response);
         } catch (NumberFormatException ex) {
             System.out.println(ex.getMessage());
         } catch (Exception ex) {

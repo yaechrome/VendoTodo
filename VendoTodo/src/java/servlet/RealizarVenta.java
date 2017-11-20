@@ -33,7 +33,7 @@ public class RealizarVenta extends HttpServlet {
             
             request.setAttribute("tipos", tipos);
             request.getRequestDispatcher(
-                    "paginas/realizarVentas.jsp").
+                    "/paginas/realizarVentas.jsp").
                     forward(request, response);
             return;
         }
@@ -68,7 +68,7 @@ public class RealizarVenta extends HttpServlet {
             request.setAttribute("msg", mensaje);
             request.setAttribute("tipos", new TipoDaoImp().listar());
             request.getRequestDispatcher(
-                    "paginas/realizarVenta.jsp").
+                    "/paginas/realizarVenta.jsp").
                     forward(request, response);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
