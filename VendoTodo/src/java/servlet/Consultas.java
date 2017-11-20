@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlet;
 
 import dao.TipoDaoImp;
@@ -36,9 +31,7 @@ public class Consultas extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         if ("GET".equals(request.getMethod())) {
 
-            request.getRequestDispatcher(
-                    "/paginas/consulta.jsp").
-                    forward(request, response);
+            request.getRequestDispatcher("/paginas/consulta.jsp").forward(request, response);
             return;
         }
         try (PrintWriter out = response.getWriter()) {
@@ -61,9 +54,7 @@ public class Consultas extends HttpServlet {
                 request.setAttribute("msg", mensaje);
             }
             request.setAttribute("respuesta", respuesta);
-            request.getRequestDispatcher(
-                    "/paginas/consulta.jsp").
-                    forward(request, response);
+            request.getRequestDispatcher("/paginas/consulta.jsp").forward(request, response);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }

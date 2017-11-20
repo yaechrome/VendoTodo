@@ -3,11 +3,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Demo Autenticación</title>
+        <title>Login</title>
     </head>
     <body>
         <header>
-            <h1>Demo Autenticación</h1>
+            <h1>Autenticación</h1>
         </header>
 
         <section>

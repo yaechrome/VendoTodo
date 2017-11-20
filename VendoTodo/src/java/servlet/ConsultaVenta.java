@@ -34,9 +34,7 @@ public class ConsultaVenta extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         if ("GET".equals(request.getMethod())) {
 
-            request.getRequestDispatcher(
-                    "/paginas/consulta.jsp").
-                    forward(request, response);
+            request.getRequestDispatcher("/paginas/consulta.jsp").forward(request, response);
             return;
         }
         try (PrintWriter out = response.getWriter()) {

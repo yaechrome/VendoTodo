@@ -40,9 +40,7 @@ public class AgregarProducto extends HttpServlet {
 
         request.setAttribute("tipos", new TipoDaoImp().listar());
         if ("GET".equals(request.getMethod())) {
-            request.getRequestDispatcher(
-                    "/paginas/agregarProducto.jsp").
-                    forward(request, response);
+            request.getRequestDispatcher("/paginas/agregarProducto.jsp").forward(request, response);
             return;
         }
         response.setContentType("text/html;charset=UTF-8");

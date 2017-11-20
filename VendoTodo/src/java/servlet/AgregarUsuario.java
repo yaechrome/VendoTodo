@@ -34,9 +34,7 @@ public class AgregarUsuario extends HttpServlet {
         request.setAttribute("perfiles", new PerfilDaoImp().listar());
         if ("GET".equals(request.getMethod())) {
 
-            request.getRequestDispatcher(
-                    USUARIO_URL_FILE).
-                    forward(request, response);
+            request.getRequestDispatcher(USUARIO_URL_FILE).forward(request, response);
             return;
         }
         response.setContentType("text/html;charset=UTF-8");
@@ -62,9 +60,7 @@ public class AgregarUsuario extends HttpServlet {
             if (!lista.isEmpty()) {
                 request.setAttribute("lista", lista);
             }
-            request.getRequestDispatcher(
-                    USUARIO_URL_FILE).
-                    forward(request, response);
+            request.getRequestDispatcher(USUARIO_URL_FILE).forward(request, response);
             return;
         }
         try (PrintWriter out = response.getWriter()) {
@@ -116,12 +112,12 @@ public class AgregarUsuario extends HttpServlet {
                         mensaje = "No se ha podido crear usuario verifique se hayan ingresado todos los datos";
                     } else {
 
-                            try {
-                                int id = Integer.parseInt(txtId);
-                        if (new UsuarioDaoImp().ValidarCambioLogin(id, txtLogin)) {
-                            mensaje = "Login ya existe!";
+                        try {
+                            int id = Integer.parseInt(txtId);
+                            if (new UsuarioDaoImp().ValidarCambioLogin(id, txtLogin)) {
+                                mensaje = "Login ya existe!";
 
-                        } else {
+                            } else {
                                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                                 Date dtfecha = dateFormat.parse(txtFecha);
                                 UsuarioDto dto = new UsuarioDto();
@@ -140,10 +136,10 @@ public class AgregarUsuario extends HttpServlet {
                                 } else {
                                     mensaje = "NO SE PUDO ACTUALIZAR!!";
                                 }
-                        }
-                            } catch (NumberFormatException e) {
-                                mensaje = "Error! el debe ser numérico";
                             }
+                        } catch (NumberFormatException e) {
+                            mensaje = "Error! el debe ser numérico";
+                        }
                     }
 
                     break;
@@ -161,9 +157,7 @@ public class AgregarUsuario extends HttpServlet {
                 request.setAttribute("msg", mensaje);
             }
             request.setAttribute("perfiles", new PerfilDaoImp().listar());
-            request.getRequestDispatcher(
-                    USUARIO_URL_FILE).
-                    forward(request, response);
+            request.getRequestDispatcher(USUARIO_URL_FILE).forward(request, response);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
