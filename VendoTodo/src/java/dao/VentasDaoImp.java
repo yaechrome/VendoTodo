@@ -19,11 +19,13 @@ public class VentasDaoImp implements VentasDao {
             PreparedStatement buscar = conexion.prepareStatement(query);
             buscar.setInt(1, codigo);
             buscar.execute();
-
+            ResultSet rs = buscar.executeQuery();
+            if(rs.next()) {
+                return true;
+            }
             buscar.close();
             conexion.close();
-            return true;
-
+            return false;
         } catch (SQLException w) {
             System.out.println("Error  " + w.getMessage());
         } catch (Exception e) {

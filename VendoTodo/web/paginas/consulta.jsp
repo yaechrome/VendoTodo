@@ -27,7 +27,7 @@
         <c:out value="${respuesta}" />
         
         <form action="<%= request.getContextPath()%>/privado/ConsultaVenta" method="POST">
-            <h5> Ingrese N° de venta: </h5><input type="text" name="txtVenta" value="" />
+            <h5> Ingrese N° de venta: </h5><input type="number" name="txtVenta" value="" />
             <input type="submit" value="Consultar" name="btnConsultarVentas" />
             
         </form>

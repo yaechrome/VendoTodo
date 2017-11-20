@@ -88,10 +88,10 @@ public class AgregarUsuario extends HttpServlet {
                             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                             Date dtfecha = dateFormat.parse(txtFecha);
                             UsuarioDto dto = new UsuarioDto();
-                            String pass = new UsuarioDaoImp().Encriptar(txtPass);
+                         
 
                             dto.setLoginUsuario(txtLogin);
-                            dto.setPassUsuario(pass);
+                            dto.setPassUsuario(new UsuarioDaoImp().Encriptar(txtPass));
                             dto.setNombreUsuario(txtNombre);
                             dto.setApellidoUsuario(txtApellido);
                             dto.setCorreoUsuario(txtCorreo);

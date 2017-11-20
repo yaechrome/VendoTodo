@@ -1,8 +1,3 @@
-<%-- 
-    Document   : agregarUsuario
-    Created on : 12-nov-2017, 19:45:19
-    Author     : yaechrome
---%>
 
 <%@page import="dto.UsuarioDto"%>
 <%@page import="java.util.ArrayList"%>
@@ -50,7 +45,7 @@
                     </tr>
                     <tr>
                         <td>Password</td>
-                        <td><input type="text" name="txtPass" value="" /></td>
+                        <td><input type="password" name="txtPass" value="" /></td>
                     </tr>
                     <tr>
                         <td>Nombre</td>
@@ -110,7 +105,7 @@
                 <tr>
                     <th>Id</th>
                        <th>Login</th>
-                       <th>Password</th>
+                      
                        <th>Nombre</th>
                        <th>Apellido</th>
                        <th>Correo</th>
@@ -125,7 +120,7 @@
                 <tr>
                     <td><%= dto.getIdUsuario()%></td>
                     <td><%= dto.getLoginUsuario()%></td>
-                    <td><%= dto.getPassUsuario()%></td>
+                   
                     <td><%= dto.getNombreUsuario()%></td>
                     <td><%= dto.getApellidoUsuario()%></td>
                     <td><%= dto.getCorreoUsuario()%></td>
