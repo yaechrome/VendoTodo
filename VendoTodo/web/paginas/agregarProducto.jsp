@@ -111,7 +111,7 @@
         <% }%>
 
     
-         <% String mensaje = (String) request.getAttribute("msg");
+        <% String mensaje = (String) request.getAttribute("msg");
             if (mensaje != null) {  %>
             <script>
                 alert("<%= mensaje%>");

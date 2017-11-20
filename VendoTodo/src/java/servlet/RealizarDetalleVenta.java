@@ -49,6 +49,23 @@ public class RealizarDetalleVenta extends HttpServlet {
 
         request.setAttribute("datos", datos);       
         request.setAttribute("tipos", new TipoDaoImp().listar());
+        
+        
+        int codigoVenta;
+        try {
+            String codigoVentaString = request.getParameter("codigo_venta");
+            request.setAttribute("codigo_venta", codigoVentaString);
+            codigoVenta = Integer.parseInt(codigoVentaString); 
+            
+        } catch (NumberFormatException e) {
+            request.setAttribute("msg", "Error");
+            request.getRequestDispatcher(
+                    "/paginas/realizarVenta.jsp").
+                    forward(request, response);
+            return;
+
+        }
+        request.setAttribute("detalles", new DetalleVentaDaoImp().ListarPorVentas(codigoVenta));
             
         if ("GET".equals(request.getMethod())) {
             request.getRequestDispatcher(
@@ -57,7 +74,7 @@ public class RealizarDetalleVenta extends HttpServlet {
             return;
         }
         response.setContentType("text/html;charset=UTF-8");
-        ArrayList<DetalleVentaDto> lista = new ArrayList<>();
+        
         try (PrintWriter out = response.getWriter()) {
             
             
@@ -78,10 +95,15 @@ public class RealizarDetalleVenta extends HttpServlet {
                 dto.setCantidad(Integer.parseInt(txtCantidad));
                 int precio = prod.getPrecioProducto();
                 dto.setTotal(Integer.parseInt(txtCantidad)*precio);
-                dto.setCodigoVenta(new VentasDaoImp().codigoNuevaVenta());
-                lista.add(dto);
+                dto.setCodigoVenta(codigoVenta);
+                if(new DetalleVentaDaoImp().agregar(dto)){
+                    mensaje = "Producto agregado";
+                }else{
+                    mensaje = "No se pudo agregar";
+                }
+                
             }
-            request.setAttribute("lista", lista);
+            request.setAttribute("lista", new DetalleVentaDaoImp().ListarPorVentas(codigoVenta));
             request.setAttribute("msg", mensaje);
             request.getRequestDispatcher(
                     "/paginas/realizarVenta.jsp").
