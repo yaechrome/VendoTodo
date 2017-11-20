@@ -4,6 +4,12 @@
     Author     : nippo
 --%>
 
+<%@page import="util.ConstanteUtil"%>
+<%@page import="dto.UsuarioDto"%>
+<%
+    UsuarioDto usuarioDto = (UsuarioDto) request.getSession().getAttribute(ConstanteUtil.LOGIN_USUARIO);
+%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,13 +20,24 @@
     <body>
         <fieldset style="display: inline-block;">
             <legend>Agregar:</legend>
+            <%if (usuarioDto.getCodigoPerfil() == 1) {%>
             <a href="<%= request.getContextPath()%>/privado/AgregarUsuario">Usuario     </a>
-            <br>
+             <br>
+            <%}%>
+           
+            <%if (usuarioDto.getCodigoPerfil() == 1) {%>
             <a href="<%= request.getContextPath()%>/privado/AgregarProducto">Producto   </a>
-            <br>
+             <br>
+            <%}%>
+           
+            <%if (usuarioDto.getCodigoPerfil() == 1 || usuarioDto.getCodigoPerfil() == 3) {%>
             <a href="<%= request.getContextPath()%>/privado/RealizarDetalleVenta">RealizarVenta     </a>
-            <br>
+             <br>
+            <%}%>
+           
+            <%if (usuarioDto.getCodigoPerfil() == 1 || usuarioDto.getCodigoPerfil() == 2) {%>
             <a href="<%= request.getContextPath()%>/privado/Consultas">Consultas     </a>
+            <%}%>
         </fieldset>
         <br>
         <br>

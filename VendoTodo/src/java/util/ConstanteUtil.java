@@ -18,4 +18,7 @@ public class ConstanteUtil {
     public static final String CONSULTA_URL_PAGE = "http://localhost:8080/vendo-todo/privado/Consultas";
     public static final String HOME_URL_PAGE = "http://localhost:8080/vendo-todo/privado/Home";
     public static final String VENTA_URL_PAGE = "http://localhost:8080/vendo-todo/privado/RealizarDetalleVenta";
+    public static final String HOME_URL_SERVLET = "/privado/Home";
+    public static final String LOGIN_USUARIO = "sesionUsuario";
+    public static final String LOGIN_URL_FILE = "/login.jsp";
 }

@@ -20,6 +20,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import servlet.Login;
+import util.ConstanteUtil;
 import static util.ConstanteUtil.*;
 
 /**
@@ -36,15 +37,15 @@ public class SessionFilter implements Filter {
 
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpSession session = httpRequest.getSession();
-        UsuarioDto usuarioAutenticado = (UsuarioDto) session.getAttribute(Login.LOGIN_USUARIO);
+        UsuarioDto usuarioAutenticado = (UsuarioDto) session.getAttribute(ConstanteUtil.LOGIN_USUARIO);
         if (usuarioAutenticado == null) {
             System.err.println("La sesión no registra ningún usuario autenticado");
             System.err.println("Se redirecciona usuario a página de login");
-            request.getRequestDispatcher(Login.LOGIN_URL_FILE).forward(request, response);
+            request.getRequestDispatcher(ConstanteUtil.LOGIN_URL_FILE).forward(request, response);
         } else {
             if (!resolvePerfil(usuarioAutenticado.getCodigoPerfil(), ((HttpServletRequest) request).getRequestURL().toString())) {
                 System.err.println("La sesión iniciada no tiene permisos para acceder a la página solicitada");
-                request.getRequestDispatcher(Login.HOME_URL_SERVLET).forward(request, response);
+                request.getRequestDispatcher(ConstanteUtil.HOME_URL_SERVLET).forward(request, response);
             } else {
                 chain.doFilter(request, response);
             }
