@@ -12,6 +12,19 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <fieldset style="display: inline-block;">
+            <legend>Agregar:</legend>
+            <a href="<%= request.getContextPath()%>/privado/AgregarUsuario">Usuario     </a>
+            <br>
+            <a href="<%= request.getContextPath()%>/AgregarProducto">Producto   </a>
+            <br>
+            <a href="<%= request.getContextPath()%>/RealizarDetalleVenta">RealizarVenta     </a>
+            <br>
+            <a href="<%= request.getContextPath()%>/privado/Consultas">Consultas     </a>
+        </fieldset>
+        <br>
+        <br>
+        
+        <div><h1>Bienvenido!! :D</h1></div>
     </body>
 </html>

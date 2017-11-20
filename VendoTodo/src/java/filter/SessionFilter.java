@@ -20,6 +20,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import servlet.Login;
+import static util.ConstanteUtil.*;
 
 /**
  *
@@ -36,13 +37,17 @@ public class SessionFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpSession session = httpRequest.getSession();
         UsuarioDto usuarioAutenticado = (UsuarioDto) session.getAttribute(Login.LOGIN_USUARIO);
-
         if (usuarioAutenticado == null) {
             System.err.println("La sesión no registra ningún usuario autenticado");
             System.err.println("Se redirecciona usuario a página de login");
             request.getRequestDispatcher(Login.LOGIN_URL_FILE).forward(request, response);
         } else {
-            chain.doFilter(request, response);
+            if (!resolvePerfil(usuarioAutenticado.getCodigoPerfil(), ((HttpServletRequest) request).getRequestURL().toString())) {
+                System.err.println("La sesión iniciada no tiene permisos para acceder a la página solicitada");
+                request.getRequestDispatcher(Login.HOME_URL_SERVLET).forward(request, response);
+            } else {
+                chain.doFilter(request, response);
+            }
         }
     }
 
@@ -54,5 +59,26 @@ public class SessionFilter implements Filter {
     @Override
     public void destroy() {
         // ninguna acción que realizar al finalizar
+    }
+
+    private boolean resolvePerfil(int idPerfil, String url) {
+        switch (idPerfil) {
+            case 2:
+                return validaPerfilConsulta(url);
+            default:
+                break;
+        }
+        return false;
+    }
+
+    public boolean validaPerfilConsulta(String url) {
+        switch (url) {
+            case CONSULTA_URL_PAGE:
+                return true;
+            case HOME_URL_PAGE:
+                return true;
+            default:
+                return false;
+        }
     }
 }

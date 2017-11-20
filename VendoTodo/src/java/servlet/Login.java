@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import dao.UsuarioDaoImp;
 import dto.UsuarioDto;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -45,13 +46,22 @@ public class Login extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             String mensajeError = "default message";
-            if ("admin".equals(request.getParameter("user"))
-                    && "admin".equals(request.getParameter("pass"))) {
-                UsuarioDto usuarioDto = new UsuarioDto();
-                usuarioDto.setLoginUsuario("admin");
-                usuarioDto.setPassUsuario("admin");
-                iniciarSesion(usuarioDto, request);
-                response.sendRedirect(request.getContextPath() + "/Home");
+            boolean error = false;
+            String nombreLogin = request.getParameter("user").trim();
+            String pass = request.getParameter("pass").trim();
+            if (!new UsuarioDaoImp().ValidarLogin(nombreLogin)) {
+                mensajeError = "Usuario no existe";
+                error = true;
+            }
+
+            if (!new UsuarioDaoImp().ValidarPassword(nombreLogin, new UsuarioDaoImp().Encriptar(pass))) {
+                mensajeError = "Clave incorrecta";
+                error = true;
+            }
+
+            if (!error) {
+                iniciarSesion(new UsuarioDaoImp().BuscarUsuario(nombreLogin), request);
+                response.sendRedirect(request.getContextPath() + HOME_URL_SERVLET);
             } else {
                 request.setAttribute("mensajeError", mensajeError);
                 request.getRequestDispatcher(LOGIN_URL_FILE).forward(request, response);
