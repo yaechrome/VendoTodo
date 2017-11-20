@@ -1,4 +1,4 @@
-# ************************************************************
+﻿# ************************************************************
 # Sequel Pro SQL dump
 # Versión 4541
 #
@@ -115,6 +115,14 @@ CREATE TABLE `detalle_venta` (
   CONSTRAINT `fk_venta` FOREIGN KEY (`codigo_venta`) REFERENCES `ventas` (`codigo_venta`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+/*Table structure for table `eliminado` */
+
+DROP TABLE IF EXISTS `eliminado`;
+
+CREATE TABLE `eliminado` (
+  `id_referencia` int(11) NOT NULL,
+  `descripcion` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
@@ -129,9 +137,9 @@ insert into perfil values(1,'Administrador');
 insert into perfil values(2,'Consulta');
 insert into perfil values(3,'Vendedor');
 
-INSERT INTO usuarios ( login_usuario, pass_usuario, nombre_usuario, apellido_usuario, correo_usuario, codigo_perfil, fechaNacimiento_usuario) VALUES ('administrador01', '12345678','Juan', 'Tapia', 'jtapia_admin@vendotodo.cl', 1, '1880-10-12');
-INSERT INTO usuarios ( login_usuario, pass_usuario, nombre_usuario, apellido_usuario, correo_usuario, codigo_perfil, fechaNacimiento_usuario) VALUES ('JuanGConsultas', 'h1o2l3a', 'Juan', 'Perez', 'juPerez_consulta@vendotodo.cl', '2', '1891-6-10' );
-INSERT INTO usuarios ( login_usuario, pass_usuario, nombre_usuario, apellido_usuario, correo_usuario, codigo_perfil, fechaNacimiento_usuario) VALUES ('JuanPVentas', '558996', 'Juan', 'Gonzalez', 'juGonzalez_venta@vendotodo.cl', '3', '1888-12-5' );
+INSERT INTO usuarios ( login_usuario, pass_usuario, nombre_usuario, apellido_usuario, correo_usuario, codigo_perfil, fechaNacimiento_usuario) VALUES ('administrador01', '9k3xyHz7uuU=','Juan', 'Tapia', 'jtapia_admin@vendotodo.cl', 1, '1880-10-12');
+INSERT INTO usuarios ( login_usuario, pass_usuario, nombre_usuario, apellido_usuario, correo_usuario, codigo_perfil, fechaNacimiento_usuario) VALUES ('JuanGConsultas', '9k3xyHz7uuU=', 'Juan', 'Perez', 'juPerez_consulta@vendotodo.cl', '2', '1891-6-10' );
+INSERT INTO usuarios ( login_usuario, pass_usuario, nombre_usuario, apellido_usuario, correo_usuario, codigo_perfil, fechaNacimiento_usuario) VALUES ('JuanPVentas', '9k3xyHz7uuU=', 'Juan', 'Gonzalez', 'juGonzalez_venta@vendotodo.cl', '3', '1888-12-5' );
 
 insert into tipo (nombre_tipo) values('Comida');
 insert into tipo (nombre_tipo) values('Bebidas');
@@ -139,7 +147,7 @@ insert into tipo (nombre_tipo) values('Electro');
 insert into tipo (nombre_tipo) values('Tecnologia');
 insert into tipo (nombre_tipo) values('Muebles');
 
-insert into producto (nombre_producto,codigo_tipo,precio_producto) values ('Leche entera caja 1L',1,600);
+insert into producto (nombre_producto,codigo_tipo,precio_producto) values ('Leche entera caja 1L',2,600);
 insert into producto (nombre_producto,codigo_tipo,precio_producto) values ('Yogurt frutilla 120g',1,140);
 insert into producto (nombre_producto,codigo_tipo,precio_producto) values ('Platanos 1Kg',1,630);
 insert into producto (nombre_producto,codigo_tipo,precio_producto) values ('Naranjas 1Kg',1,700);
