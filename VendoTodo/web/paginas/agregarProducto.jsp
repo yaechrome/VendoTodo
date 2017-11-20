@@ -56,7 +56,7 @@
                     </tr>
                     <tr>
                         <td>Precio</td>
-                        <td><input type="text" name="txtPrecio" value="" id="txtPrecio"/></td>
+                        <td><input type="number" name="txtPrecio" value="" id="txtPrecio"/></td>
                     </tr>
                     <tr>
                         <td>ID Producto</td>
@@ -66,7 +66,8 @@
             </table><br>
             <input type="submit" value="Grabar" name="btn" /> 
             <input type="submit" value="Actualizar" name="btn" />    
-            <input type="submit" value="Mostrar" name="btn" />     
+            <input type="submit" value="Mostrar" name="btn" />    
+            <input type="reset" name="reset" value="Limpiar" />
         </form> 
 
            <% ArrayList<ProductoDto> lista

@@ -86,6 +86,7 @@
             <input type="submit" value="Grabar" name="btn" /> 
             <input type="submit" value="Actualizar" name="btn" />    
             <input type="submit" value="Mostrar" name="btn" />  
+            <input type="reset" name="reset" value="Limpiar" />
         </form>
                        
 
