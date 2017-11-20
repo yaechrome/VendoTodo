@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author yaechrome
  */
-@WebServlet(name = "AgregarUsuario", urlPatterns = {"/AgregarUsuario"})
+@WebServlet(name = "AgregarUsuario", urlPatterns = {"/privado/AgregarUsuario"})
 public class AgregarUsuario extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
