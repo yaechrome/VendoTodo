@@ -6,64 +6,75 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Consulta</title>
-        <link rel="stylesheet" href="css/style.css" media="all" type="text/css">
+        <link rel="stylesheet" href="../css/style.css" media="all" type="text/css">
 
     </head>
     <body>
-        <form action="<%= request.getContextPath()%>/privado/Consultas" method="POST">
-            <table border="0">
-                <h4>Seleccione la consulta </h4>
-                <tbody>
-                    <tr>
+        <h1>Consultas</h1>
+        <div style="text-align: center;"> 
+            <form action="<%= request.getContextPath()%>/privado/Consultas" method="POST">
+
+                <div style="form-control">
+
+                <table border="0">
+                    <h4>Seleccione la consulta </h4>
+                    <tbody>
+                        <tr>
+
                         <td><input type="radio" name="consulta" value="Venta" /> Vendedor con más ventas</td>
                         <td><input type="radio" name="consulta" value="Tipo" /> Tipo más vendido</td>
+                    </div>
                     </tr>
-                </tbody>
-            </table>
-            <input type="submit" value="Consultar" name="btnConsultar" />
-            
-            
-        </form>
-        <c:set var="respuesta" value="${respuesta}" ></c:set>
-        <c:out value="${respuesta}" />
-        
+                    </tbody>
+                </table>
+                <input type="submit" value="Consultar" name="btnConsultar" />
+                </div>
+        </div>
+
+    </form>
+    <c:set var="respuesta" value="${respuesta}" ></c:set>
+    <c:out value="${respuesta}" />
+    <div style="text-align: center;"> 
         <form action="<%= request.getContextPath()%>/privado/ConsultaVenta" method="POST">
             <h5> Ingrese N° de venta: </h5><input type="number" name="txtVenta" value="" />
             <input type="submit" value="Consultar" name="btnConsultarVentas" />
-            
+            <br>
+
         </form>
-        
+    </div>
+    <div style="text-decoration: center;"> 
         <c:set var="listaDesplegar" scope="request" 
                value="${listaDesplegar}" ></c:set>
         <c:if test="${listaDesplegar!=null}" >
-           <table border="1">
-               <thead>
-                   <tr>
-                       <th>Codigo Producto</th>
-                       <th>Cantidad</th>
-                       <th>Total</th>
-                       <th>Codigo Venta</th>
-                   </tr>
-               </thead>
-               <tbody>
-                   <c:forEach var="dto" items="${listaDesplegar}" >
+            <br>
+            <table border="1">
+                <thead>
                     <tr>
-                       <td><c:out value="${dto.codigoProducto}" /></td>                                       
-                       <td><c:out value="${dto.cantidad}" /></td>
-                       <td><c:out value="${dto.total}" /></td>      
-                       <td><c:out value="${dto.codigoVenta}" /></td>
+                        <th>Codigo Producto</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                        <th>Codigo Venta</th>
                     </tr>
-                   </c:forEach>
-               </tbody>
-           </table>
+                </thead>
+                <tbody>
+                    <c:forEach var="dto" items="${listaDesplegar}" >
+                        <tr>
+                            <td><c:out value="${dto.codigoProducto}" /></td>                                       
+                            <td><c:out value="${dto.cantidad}" /></td>
+                            <td><c:out value="${dto.total}" /></td>      
+                            <td><c:out value="${dto.codigoVenta}" /></td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
 
         </c:if>        
-        
-        <% String mensaje = (String) request.getAttribute("msg");
-            if (mensaje != null) {  %>
-            <script>
-                alert("<%= mensaje%>");
-            </script>
-        <% } %>
-    </body>
+    </div>
+    <% String mensaje = (String) request.getAttribute("msg");
+            if (mensaje != null) {%>
+    <script>
+            alert("<%= mensaje%>");
+    </script>
+    <% }%>
+</body>
 </html>

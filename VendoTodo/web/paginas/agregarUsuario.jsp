@@ -8,7 +8,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Usuarios</title>
-        <link rel="stylesheet" href="css/style.css" media="all" type="text/css">
+        <link rel="stylesheet" href="../css/style.css" media="all" type="text/css">
         <script type="text/javascript">
             
             window.onload = function () {
@@ -38,6 +38,8 @@
         <h1>Usuarios</h1>
         
         <form action="<%= request.getContextPath()%>/privado/AgregarUsuario" method="POST">
+            <div style="login-form">
+                
             <table border="0">       
                 <tbody>
                     <tr>
@@ -88,6 +90,8 @@
             <input type="submit" value="Actualizar" name="btn" />    
             <input type="submit" value="Mostrar" name="btn" />  
             <input type="reset" name="reset" value="Limpiar" />
+                        </div>
+
         </form>
                        
 

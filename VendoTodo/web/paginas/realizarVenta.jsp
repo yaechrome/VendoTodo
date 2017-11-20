@@ -15,7 +15,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         
         <title>Realizar Venta</title>
-        <link rel="stylesheet" href="css/style.css" media="all" type="text/css">
+        <link rel="stylesheet" href="../css/style.css" media="all" type="text/css">
         <script type="text/javascript">
             
             window.onload = function () {
@@ -76,9 +76,10 @@
         </script>
     </head>
     <body>
-        
-        <form action="<%= request.getContextPath()%>/privado/RealizarDetalleVenta" method="POST">
-            
+        <h1>Realizar Venta</h1>
+        <div style="text-align: center;">
+        <form action="<%= request.getContextPath()%>/privado/RealizarDetalleVenta?codigo_venta=<%=request.getAttribute("codigo_venta")%>" method="POST">
+            <div class="login-form">
             <table border="0">
                 
                 <tbody>
@@ -112,12 +113,17 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
                         <input class="log-btn" type="submit" value="Agregar producto" name="btnAgregarProd" onclick="agregarDetalle()" id="btnAgregar"/>
                 
         </form>
-                        
-             
-
+         </div>               
+        <% String mensaje = (String) request.getAttribute("msg");
+            if (mensaje != null) {  %>
+            <script>
+                alert("<%= mensaje%>");
+            </script>
+        <% } %>
         
                 
     </body>

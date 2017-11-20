@@ -4,7 +4,9 @@
   -webkit-box-sizing:border-box;
   font-family:arial;
 }
-body{background:url("http://andiplay.com/wp-content/uploads/2015/08/wall3.jpg")#FF9000}
+body{
+    background:url("assets/wall3.jpg")#A8D1A8
+}
 h1{
   color:#AAA173;
   text-align:center;
@@ -18,7 +20,7 @@ h1{
   border-radius:4px;
   -moz-border-radius:4px;
   -webkit-border-radius:4px;
-  margin:50px auto;
+  margin:50px auto;  
 }
 .form-group{
   position: relative;
@@ -120,3 +122,5 @@ h1{
   color:#f00;
   float:left;
 }
+
+table{margin:auto;}
