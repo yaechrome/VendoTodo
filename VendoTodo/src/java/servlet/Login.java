@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import util.ConstanteUtil;
 
 /**
  *
@@ -23,13 +24,9 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "Login", urlPatterns = {"/Login"})
 public class Login extends HttpServlet {
 
-    public static final String LOGIN_USUARIO = "sesionUsuario";
-    public static final String LOGIN_URL_FILE = "/login.jsp";
-    public static final String HOME_URL_SERVLET = "/privado/Home";
-
     private void iniciarSesion(UsuarioDto usuario, HttpServletRequest request) {
         HttpSession session = request.getSession();
-        session.setAttribute(LOGIN_USUARIO, usuario);
+        session.setAttribute(ConstanteUtil.LOGIN_USUARIO, usuario);
     }
 
     /**
@@ -61,10 +58,10 @@ public class Login extends HttpServlet {
 
             if (!error) {
                 iniciarSesion(new UsuarioDaoImp().BuscarUsuario(nombreLogin), request);
-                response.sendRedirect(request.getContextPath() + HOME_URL_SERVLET);
+                response.sendRedirect(request.getContextPath() + ConstanteUtil.HOME_URL_SERVLET);
             } else {
                 request.setAttribute("mensajeError", mensajeError);
-                request.getRequestDispatcher(LOGIN_URL_FILE).forward(request, response);
+                request.getRequestDispatcher(ConstanteUtil.LOGIN_URL_FILE).forward(request, response);
             }
 
         }
@@ -82,7 +79,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher(LOGIN_URL_FILE).forward(request, response);
+        request.getRequestDispatcher(ConstanteUtil.LOGIN_URL_FILE).forward(request, response);
     }
 
     /**
