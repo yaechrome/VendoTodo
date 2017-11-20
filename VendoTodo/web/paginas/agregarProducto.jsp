@@ -59,13 +59,12 @@
                         <td><input type="text" name="txtPrecio" value="" id="txtPrecio"/></td>
                     </tr>
                     <tr>
-                        <td>ID</td>
+                        <td>ID Producto</td>
                         <td><input type="text" name="txtId" value="" readonly="true" id="txtId"/></td>
                     </tr>
                 </tbody>
             </table><br>
             <input type="submit" value="Grabar" name="btn" /> 
-            <input type="submit" value="Eliminar" name="btn" />  
             <input type="submit" value="Actualizar" name="btn" />    
             <input type="submit" value="Mostrar" name="btn" />     
         </form> 

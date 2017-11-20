@@ -39,6 +39,8 @@ public class UsuarioDaoImp implements UsuarioDao {
         return false;
     }
 
+    
+
     @Override
     public boolean ValidarPassword(UsuarioDto usuario, String pass) {
         try {
@@ -177,6 +179,7 @@ public class UsuarioDaoImp implements UsuarioDao {
                 dto.setApellidoUsuario(rs.getString("apellido_usuario"));
                 dto.setCorreoUsuario(rs.getString("correo_usuario"));
                 dto.setCodigoPerfil(rs.getInt("codigo_perfil"));
+                dto.setFechaNacimiento(rs.getDate("fechaNacimiento_usuario"));
                 lista.add(dto);
             }
             buscar.close();
