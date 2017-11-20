@@ -4,6 +4,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login</title>
+        <link rel="stylesheet" href="css/style.css" media="all" type="text/css">
     </head>
     <body>
         <header>
@@ -11,44 +12,39 @@
         </header>
 
         <section>
-            <h2>Login</h2>          
-            <form action="<%= request.getContextPath()%>/Login" method="POST">
-                <fieldset>
-                    <legend>Credenciales de usuario</legend> 
+            <div class="login-form">
+                <h2>Login</h2>          
+                <form action="<%= request.getContextPath()%>/Login" method="POST">
+                    <fieldset>
+                        <legend>Credenciales de usuario</legend> 
 
-                    <% if (request.getAttribute("mensajeError") != null) {%>
-                    <div class="error">
-                        <p>             
-                            <%= request.getAttribute("mensajeError")%>
-                        </p>
-                    </div>
-                    <% }%>
-                    <table>
-                        <tr>
-                            <td>Nombre: </td>
-                            <td>
-                                <input type="text" name="user" required/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Clave: </td>
-                            <td>
-                                <input type="password" name="pass" required/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <input type="submit" name="submit" value="Ingresar" />
-                                <input type="reset" name="reset" value="Limpiar" />
-                            </td>                        
-                        </tr>
-                    </table>
-                </fieldset>
-            </form>
+                        <% if (request.getAttribute("mensajeError") != null) {%>
+                        <div class="error">
+                            <p>             
+                                <%= request.getAttribute("mensajeError")%>
+                            </p>
+                        </div>
+                        <% }%>
+
+                        <div class="form-group ">
+                            <input class="form-control" type="text" name="user" required placeholder="Usuario"/>
+                            <i class="fa fa-user"></i>
+                        </div>
+
+
+                        <div class="form-group ">
+                            <input class="form-control" type="password" name="pass" required placeholder="Password"/>
+                            <i class="fa fa-lock"></i>
+                        </div>
+
+                        <input class="log-btn" type="submit" name="submit" value="Ingresar" />
+                        <input class="log-btn" type="reset" name="reset" value="Limpiar" />
+
+                    </fieldset>                   
+                </form>
+            </div>
+
         </section>
 
-        <footer>
-            Desarrollo Web en Java
-        </footer>
     </body>
 </html>
