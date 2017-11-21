@@ -65,9 +65,14 @@ public class RealizarDetalleVenta extends HttpServlet {
             return;
 
         }
+        ArrayList<DetalleVentaDto> lista = new DetalleVentaDaoImp().ListarPorVentas(codigoVenta);
+        if(!lista.isEmpty()){
+            request.setAttribute("lista", lista );
+        }
         request.setAttribute("detalles", new DetalleVentaDaoImp().ListarPorVentas(codigoVenta));
             
         if ("GET".equals(request.getMethod())) {
+            
             request.getRequestDispatcher(
                     "/paginas/realizarVenta.jsp").
                     forward(request, response);
@@ -91,19 +96,24 @@ public class RealizarDetalleVenta extends HttpServlet {
                 
                 DetalleVentaDto dto = new DetalleVentaDto();
                 ProductoDto prod = new ProductoDaoImp().BuscarProducto(Integer.parseInt(cmbProductos));
-                dto.setCodigoProducto(Integer.parseInt(cmbTipo));
+                dto.setCodigoProducto(Integer.parseInt(cmbProductos));
                 dto.setCantidad(Integer.parseInt(txtCantidad));
                 int precio = prod.getPrecioProducto();
                 dto.setTotal(Integer.parseInt(txtCantidad)*precio);
                 dto.setCodigoVenta(codigoVenta);
                 if(new DetalleVentaDaoImp().agregar(dto)){
                     mensaje = "Producto agregado";
+                    lista = new DetalleVentaDaoImp().ListarPorVentas(codigoVenta);
                 }else{
                     mensaje = "No se pudo agregar";
                 }
                 
             }
-            request.setAttribute("lista", new DetalleVentaDaoImp().ListarPorVentas(codigoVenta));
+            
+            if(!lista.isEmpty()){
+                request.setAttribute("lista", lista );
+            }
+            
             request.setAttribute("msg", mensaje);
             request.getRequestDispatcher(
                     "/paginas/realizarVenta.jsp").
