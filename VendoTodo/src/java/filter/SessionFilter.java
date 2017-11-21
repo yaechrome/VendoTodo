@@ -91,6 +91,8 @@ public class SessionFilter implements Filter {
         switch (url) {
             case CONSULTA_URL_PAGE:
                 return true;
+            case CONSULTAVENTA_URL_PAGE:
+                return true;
             case HOME_URL_PAGE:
                 return true;
             default:
@@ -104,8 +106,9 @@ public class SessionFilter implements Filter {
                 return true;
             case HOME_URL_PAGE:
                 return true;
+
             default:
-                return false;
+                return true;
         }
     }
 }
