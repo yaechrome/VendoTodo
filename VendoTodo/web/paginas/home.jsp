@@ -19,6 +19,12 @@
         <link rel="stylesheet" href="../css/style.css" media="all" type="text/css">
     </head>
     <body>
+        <ul>
+            
+            <li style="float:right"><a class="active" href="../paginas/logout.jsp">Salir</a></li>
+
+        </ul>
+        <br><br>
         <div class="login-form">
             <h1>Home</h1>
             
@@ -44,9 +50,7 @@
                 <br>
                 <%}%>
             </fieldset>
-            <br>
-            <br>
-            <a href="../paginas/logout.jsp">Salir</a>
+
         </div>
 
 
