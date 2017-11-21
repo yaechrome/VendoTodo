@@ -93,15 +93,10 @@ h1{
 .log-btn{
   background:#0AC986;
   dispaly:inline-block;
-  width:50%;
-  font-size:16px;
-  height:25px;
   color:#fff;
   text-decoration:none;
-  border:none;
-  border-radius:4px;
-  -moz-border-radius:4px;
-  -webkit-border-radius:4px;
+  border-radius:6px;
+
 }
 
 .link{

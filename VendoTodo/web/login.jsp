@@ -33,12 +33,12 @@
                         <div class="form-group ">
                             <input class="form-control" type="password" name="pass" required placeholder="Password"/>
                         </div>
-
+                        
                         <input class="log-btn" type="submit" name="submit" value="Ingresar" />
                         <input class="log-btn" type="reset" name="reset" value="Limpiar" />
                         <a href="<%= request.getContextPath()%>/paginas/registrarUsuario.jsp">Registarse     </a>
-
-                    </fieldset>                   
+                   
+                    </fieldset>  
                 </form>
             </div>
 
