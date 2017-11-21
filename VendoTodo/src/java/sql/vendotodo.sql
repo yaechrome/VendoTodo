@@ -136,7 +136,7 @@ CREATE TABLE `eliminado` (
 insert into perfil values(1,'Administrador');
 insert into perfil values(2,'Consulta');
 insert into perfil values(3,'Vendedor');
-
+INSERT INTO usuarios ( login_usuario, pass_usuario, nombre_usuario, apellido_usuario, correo_usuario, codigo_perfil, fechaNacimiento_usuario) VALUES ('arturo', 'LWko1bEiDu0=','Arturo', 'Vargas', 'arvargas@vendotodo.cl', 1, '1885-10-12');
 INSERT INTO usuarios ( login_usuario, pass_usuario, nombre_usuario, apellido_usuario, correo_usuario, codigo_perfil, fechaNacimiento_usuario) VALUES ('administrador01', '9k3xyHz7uuU=','Juan', 'Tapia', 'jtapia_admin@vendotodo.cl', 1, '1880-10-12');
 INSERT INTO usuarios ( login_usuario, pass_usuario, nombre_usuario, apellido_usuario, correo_usuario, codigo_perfil, fechaNacimiento_usuario) VALUES ('JuanGConsultas', '9k3xyHz7uuU=', 'Juan', 'Perez', 'juPerez_consulta@vendotodo.cl', '2', '1891-6-10' );
 INSERT INTO usuarios ( login_usuario, pass_usuario, nombre_usuario, apellido_usuario, correo_usuario, codigo_perfil, fechaNacimiento_usuario) VALUES ('JuanPVentas', '9k3xyHz7uuU=', 'Juan', 'Gonzalez', 'juGonzalez_venta@vendotodo.cl', '3', '1888-12-5' );

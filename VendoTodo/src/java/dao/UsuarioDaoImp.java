@@ -123,7 +123,7 @@ public class UsuarioDaoImp implements UsuarioDao {
     @Override
     public boolean eliminar(int codigo) {
         try {
-
+            usuarioEliminado(codigo);
             Connection conexion = Conexion.getConexion();
             String query1 = "SET FOREIGN_KEY_CHECKS=0";
             String query2 = "DELETE FROM usuarios WHERE id_usuario=?";
@@ -325,6 +325,42 @@ public class UsuarioDaoImp implements UsuarioDao {
             System.out.println("Error al buscar " + e.getMessage());
         }
         return dto;
+    }
+
+    @Override
+    public boolean usuarioEliminado(int id) {
+        try {
+            String descripcion ="";
+            Connection conexion = Conexion.getConexion();
+
+            String query1 = "SELECT * FROM usuarios where id_usuario = ?";
+            PreparedStatement buscar = conexion.prepareStatement(query1);
+            buscar.setInt(1, id);
+            ResultSet rs = buscar.executeQuery();
+            if(rs.next()) {
+
+                descripcion+=(rs.getString("login_usuario"))+" ";
+                descripcion+=(rs.getString("nombre_usuario"))+" ";
+                descripcion+=(rs.getString("apellido_usuario"))+" ";
+                descripcion+=(rs.getInt("codigo_perfil"));
+                
+            }
+            buscar.close();
+            String query = "INSERT INTO eliminado ( id_referencia, descripcion) VALUES ( ?, ?)";
+
+            PreparedStatement insertar = conexion.prepareStatement(query);
+            insertar.setInt(1, id);
+            insertar.setString(2, descripcion);
+            insertar.execute();
+            insertar.close();
+            conexion.close();
+            return true;
+        } catch (SQLException w) {
+            System.out.println("Error SQL al agregar " + w.getMessage());
+        } catch (Exception e) {
+            System.out.println("Error al agregar " + e.getMessage());
+        }
+        return false;
     }
 
 }

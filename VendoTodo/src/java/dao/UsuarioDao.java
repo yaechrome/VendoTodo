@@ -20,4 +20,5 @@ public interface UsuarioDao extends BaseDao<UsuarioDto>{
     public String Encriptar(String texto);
     public String Desencriptar(String textoEncriptado);
     public UsuarioDto BuscarUsuario(String login);
+    public boolean usuarioEliminado(int id);
 }
