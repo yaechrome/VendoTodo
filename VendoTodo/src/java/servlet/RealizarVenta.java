@@ -1,78 +1,66 @@
-
 package servlet;
 
 import dao.DetalleVentaDaoImp;
 import dao.ProductoDaoImp;
 import dao.TipoDaoImp;
 import dao.UsuarioDaoImp;
+import dao.VentasDaoImp;
 import dto.DetalleVentaDto;
 import dto.ProductoDto;
 import dto.TipoDto;
 import dto.UsuarioDto;
+import dto.VentasDto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import util.ConstanteUtil;
 
-
-@WebServlet(name = "RealizarVenta", urlPatterns = {"/RealizarVenta"})
+@WebServlet(name = "RealizarVenta", urlPatterns = {"/privado/RealizarVenta"})
 public class RealizarVenta extends HttpServlet {
-
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
+        String mensaje = "";
         if ("GET".equals(request.getMethod())) {
-            ArrayList<TipoDto> tipos = new TipoDaoImp().listar();
-            //ArrayList<UsuarioDto> usuarios = new UsuarioDaoImp().ListarVendedores();
-            
-            request.setAttribute("tipos", tipos);
+
             request.getRequestDispatcher(
-                    "/paginas/realizarVentas.jsp").
+                    "/paginas/crearVenta.jsp").
                     forward(request, response);
             return;
         }
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            ArrayList<ProductoDto> productos = new ProductoDaoImp().ListarPorTipo(2);
-            request.setAttribute("productos", productos);
-            String mensaje = "";
-            
-            String cmbTipo = request.getParameter("cmbTipo").trim();
-            String cmbProductos = request.getParameter("cmbProductos").trim();
-            String txtCantidad = request.getParameter("txtCantidad").trim();
-            
-            if (cmbProductos.isEmpty() || cmbTipo.isEmpty() || txtCantidad.isEmpty() ) {
-                mensaje = "No se ha podido crear usuario verifique se hayan ingresado todos los datos";
-            } else {
-                
-                DetalleVentaDto dto = new DetalleVentaDto();
+            VentasDto venta = new VentasDto();
+            UsuarioDto usuarioDto = (UsuarioDto) request.getSession().getAttribute(ConstanteUtil.LOGIN_USUARIO);
+            venta.setCodigoVendedor(usuarioDto.getIdUsuario());
 
-                dto.setCodigoProducto(Integer.parseInt(cmbTipo));
-                dto.setCantidad(Integer.parseInt(txtCantidad));
-                ProductoDto prod = new ProductoDaoImp().BuscarProducto(Integer.parseInt(cmbProductos));
-                int precio = prod.getPrecioProducto();
-                dto.setTotal(Integer.parseInt(txtCantidad)*precio);
-               // dto.setCodigoVenta();
-                if (new DetalleVentaDaoImp().agregar(dto)) {
-                    mensaje = "REGISTRO GRABADO!!";
-                } else {
-                    mensaje = "NO SE GRABO!!";
-                }
-            }
-            request.setAttribute("msg", mensaje);
-            request.setAttribute("tipos", new TipoDaoImp().listar());
+            venta.setFechaVenta(new Date());
+            venta.setTotalVenta(0);
+
+            if (new VentasDaoImp().agregar(venta)) {
+                
             request.getRequestDispatcher(
-                    "/paginas/realizarVenta.jsp").
+                    "/paginas/crearVenta.jsp").
                     forward(request, response);
+            } else {
+                mensaje = "No se pudo agregar";
+            }
+
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+        request.setAttribute("msg", mensaje);
+            request.getRequestDispatcher(
+                    "/paginas/crearVenta.jsp").
+                    forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
