@@ -1,5 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="util.ConstanteUtil"%>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -10,6 +13,11 @@
 
     </head>
     <body>
+        <ul>
+            <li><a class="active" href="<%= request.getContextPath()%>/privado/Home">Home</a></li>
+            <li><a href="../paginas/logout.jsp">Salir</a></li>
+            
+        </ul>
         <h1>Consultas</h1>
         <div style="text-align: center;"> 
             <form action="<%= request.getContextPath()%>/privado/Consultas" method="POST">
@@ -35,8 +43,8 @@
     <table>
         <tr>
             <td>
-            <c:set var="respuesta" value="${respuesta}" ></c:set>
-            <c:out value="${respuesta}" />
+                <c:set var="respuesta" value="${respuesta}" ></c:set>
+                <c:out value="${respuesta}" />
             </td>
         <tr>
     </table>
