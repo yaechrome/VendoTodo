@@ -32,6 +32,11 @@
         </script>
     </head>
     <body>
+        <ul>
+            <li><a class="active" href="<%= request.getContextPath()%>/privado/Home">Home</a></li>
+            <li><a href="../paginas/logout.jsp">Salir</a></li>
+            
+        </ul>
         <h1>Productos</h1>
         
         <form action="<%= request.getContextPath()%>/privado/AgregarProducto" method="POST">
