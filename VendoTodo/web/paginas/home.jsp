@@ -4,6 +4,7 @@
     Author     : nippo
 --%>
 
+<%@page import="java.util.Date"%>
 <%@page import="util.ConstanteUtil"%>
 <%@page import="dto.UsuarioDto"%>
 <%
@@ -20,14 +21,14 @@
     </head>
     <body>
         <ul>
-            
+
             <li style="float:right"><a class="active" href="../paginas/logout.jsp">Salir</a></li>
 
         </ul>
         <br><br>
         <div class="login-form">
             <h1>Home</h1>
-            
+
             <fieldset style="display: inline-block;">
                 <legend>MENÚ</legend>
                 <%if (usuarioDto.getCodigoPerfil() == 1) {%>
@@ -50,8 +51,15 @@
                 <br>
                 <%}%>
             </fieldset>
-
+            <br>
         </div>
+
+        <ul>
+            <li><a class="active"> Usuario conectado: <%=usuarioDto.getNombreUsuario()%></a></li>
+        </ul>
+
+           
+
 
 
     </body>
