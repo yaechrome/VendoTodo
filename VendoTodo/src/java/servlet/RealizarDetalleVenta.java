@@ -31,11 +31,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "RealizarDetalleVenta", urlPatterns = {"/privado/RealizarDetalleVenta"})
 public class RealizarDetalleVenta extends HttpServlet {
 
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         String datos = "{";
         Map<Integer, ArrayList<ProductoDto>> tipos = new ProductoDaoImp().produtosPorTipo();
         for (Map.Entry<Integer, ArrayList<ProductoDto>> tipo : tipos.entrySet()) {
@@ -47,16 +46,15 @@ public class RealizarDetalleVenta extends HttpServlet {
         }
         datos += "}";
 
-        request.setAttribute("datos", datos);       
+        request.setAttribute("datos", datos);
         request.setAttribute("tipos", new TipoDaoImp().listar());
-        
-        
+
         int codigoVenta;
         try {
             String codigoVentaString = request.getParameter("codigo_venta");
             request.setAttribute("codigo_venta", codigoVentaString);
-            codigoVenta = Integer.parseInt(codigoVentaString); 
-            
+            codigoVenta = Integer.parseInt(codigoVentaString);
+
         } catch (NumberFormatException e) {
             request.setAttribute("msg", "Error");
             request.getRequestDispatcher(
@@ -66,54 +64,66 @@ public class RealizarDetalleVenta extends HttpServlet {
 
         }
         ArrayList<DetalleVentaDto> lista = new DetalleVentaDaoImp().ListarPorVentas(codigoVenta);
-        if(!lista.isEmpty()){
-            request.setAttribute("lista", lista );
+        if (!lista.isEmpty()) {
+            request.setAttribute("lista", lista);
         }
         request.setAttribute("detalles", new DetalleVentaDaoImp().ListarPorVentas(codigoVenta));
-            
+
         if ("GET".equals(request.getMethod())) {
-            
+
             request.getRequestDispatcher(
                     "/paginas/realizarVenta.jsp").
                     forward(request, response);
             return;
         }
         response.setContentType("text/html;charset=UTF-8");
-        
+
         try (PrintWriter out = response.getWriter()) {
-            
-            
+
             String mensaje = "";
-            
-            
+
+            String boton = request.getParameter("btn").trim();
             String cmbProductos = request.getParameter("cmbProductos").trim();
             String cmbTipo = request.getParameter("cmbTipos").trim();
             String txtCantidad = request.getParameter("txtCantidad").trim();
-            
-            if (cmbProductos.isEmpty() || cmbTipo.isEmpty() || txtCantidad.isEmpty() ) {
-                mensaje = "No se ha podido crear usuario verifique se hayan ingresado todos los datos";
-            } else {
-                
-                DetalleVentaDto dto = new DetalleVentaDto();
-                ProductoDto prod = new ProductoDaoImp().BuscarProducto(Integer.parseInt(cmbProductos));
-                dto.setCodigoProducto(Integer.parseInt(cmbProductos));
-                dto.setCantidad(Integer.parseInt(txtCantidad));
-                int precio = prod.getPrecioProducto();
-                dto.setTotal(Integer.parseInt(txtCantidad)*precio);
-                dto.setCodigoVenta(codigoVenta);
-                if(new DetalleVentaDaoImp().agregar(dto)){
-                    mensaje = "Producto agregado";
-                    lista = new DetalleVentaDaoImp().ListarPorVentas(codigoVenta);
-                }else{
-                    mensaje = "No se pudo agregar";
-                }
-                
+
+            switch (boton) {
+                case "Agregar producto":
+                    if (cmbProductos.isEmpty() || cmbTipo.isEmpty() || txtCantidad.isEmpty()) {
+                        mensaje = "No se ha podido crear producto verifique se hayan ingresado todos los datos";
+                    } else {
+
+                        DetalleVentaDto dto = new DetalleVentaDto();
+                        ProductoDto prod = new ProductoDaoImp().BuscarProducto(Integer.parseInt(cmbProductos));
+                        dto.setCodigoProducto(Integer.parseInt(cmbProductos));
+                        dto.setCantidad(Integer.parseInt(txtCantidad));
+                        int precio = prod.getPrecioProducto();
+                        dto.setTotal(Integer.parseInt(txtCantidad) * precio);
+                        dto.setCodigoVenta(codigoVenta);
+                        if (new DetalleVentaDaoImp().agregar(dto)) {
+                            mensaje = "Producto agregado";
+                            lista = new DetalleVentaDaoImp().ListarPorVentas(codigoVenta);
+                        } else {
+                            mensaje = "No se pudo agregar";
+                        }
+
+                    }
+                    break;
+                case "Finalizar Venta":
+                    if (new VentasDaoImp().actualizarTotal(codigoVenta)) {
+                        mensaje = "Venta finalizada";
+                    } else {
+                        mensaje = "No se pudo finalizar venta";
+                    }
+                    break;
+                default:
+                    break;
             }
-            
-            if(!lista.isEmpty()){
-                request.setAttribute("lista", lista );
+
+            if (!lista.isEmpty()) {
+                request.setAttribute("lista", lista);
             }
-            
+
             request.setAttribute("msg", mensaje);
             request.getRequestDispatcher(
                     "/paginas/realizarVenta.jsp").
@@ -136,9 +146,7 @@ public class RealizarDetalleVenta extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
-        
-        
+
     }
 
     /**

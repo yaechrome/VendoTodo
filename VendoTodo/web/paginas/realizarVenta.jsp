@@ -24,13 +24,7 @@
                 txtCantidad = document.getElementById("txtCantidad");
                 txtTotal = document.getElementById("txtTotal");
                 datos = <%=(String) request.getAttribute("datos")%>;
-                btnAgregar = document.getElementById("btnAgregar");
-
-                btnAgregar.onclick = function () {
-
-                    agregarDetalle();
-
-                };
+                
 
 
 
@@ -68,11 +62,7 @@
                 txtTotal.value = producto.precio * txtCantidad.value;
             }
 
-            function agregarDetalle() {
-
-                listaDetalle.push({codigoProducto: cmbProductos.value, cantidad: txtCantidad.value, total: txtTotal.value});
-
-            }
+            
 
         </script>
     </head>
@@ -121,7 +111,8 @@
                         </tbody>
                     </table>
                 </div>
-                <input class="log-btn" type="submit" value="Agregar producto" name="btnAgregarProd" onclick="agregarDetalle()" id="btnAgregar"/>
+                <input class="log-btn" type="submit" value="Agregar producto" name="btn" />
+                <input class="log-btn" type="submit" value="Finalizar Venta" name="btn" />
 
 
         </div>               

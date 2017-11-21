@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import sql.Conexion;
 
 public class VentasDaoImp implements VentasDao {
@@ -21,7 +23,7 @@ public class VentasDaoImp implements VentasDao {
             buscar.setInt(1, codigo);
             buscar.execute();
             ResultSet rs = buscar.executeQuery();
-            if(rs.next()) {
+            if (rs.next()) {
                 return true;
             }
             buscar.close();
@@ -31,6 +33,27 @@ public class VentasDaoImp implements VentasDao {
             System.out.println("Error  " + w.getMessage());
         } catch (Exception e) {
             System.out.println("Error " + e.getMessage());
+        }
+        return false;
+    }
+    @Override
+    public boolean actualizarTotal(int codigo_venta) {
+        try {
+            Connection conexion = Conexion.getConexion();
+            
+            String query = "UPDATE ventas SET total_venta =(SELECT SUM(total) FROM detalle_venta WHERE codigo_venta = ? GROUP BY codigo_venta) WHERE codigo_venta = ?";
+            PreparedStatement modificar = conexion.prepareStatement(query);
+            
+            modificar.setInt(1, codigo_venta);
+            modificar.setInt(2, codigo_venta);
+            modificar.execute();
+            modificar.close();
+            conexion.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(VentasDaoImp.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception e) {
+            System.out.println("Error al agregar " + e.getMessage());
         }
         return false;
     }
