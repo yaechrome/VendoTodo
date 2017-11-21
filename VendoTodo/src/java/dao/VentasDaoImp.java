@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import sql.Conexion;
@@ -41,13 +42,18 @@ public class VentasDaoImp implements VentasDao {
 
             String query = "insert into ventas (codigo_vendedor,fecha_venta,total_venta) values (?,?,?)";
 
-            PreparedStatement insertar = conexion.prepareStatement(query);
+            PreparedStatement insertar = conexion.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             insertar.setInt(1, dto.getCodigoVendedor());
             insertar.setDate(2, new java.sql.Date(dto.getFechaVenta().getTime()));
             insertar.setInt(3, dto.getTotalVenta());
 
-            insertar.execute();
+            insertar.executeUpdate();
+            ResultSet generatedKeys = insertar.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                dto.setCodigoVenta(generatedKeys.getInt(1));
+            }
+
             insertar.close();
             conexion.close();
             return true;

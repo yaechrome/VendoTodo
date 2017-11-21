@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,21 +47,23 @@ public class RealizarVenta extends HttpServlet {
             venta.setTotalVenta(0);
 
             if (new VentasDaoImp().agregar(venta)) {
-                
-            request.getRequestDispatcher(
-                    "/paginas/crearVenta.jsp").
-                    forward(request, response);
+
+                request.setAttribute("codigo_venta", venta.getCodigoVenta());
+                request.getRequestDispatcher("/paginas/crearVenta.jsp")
+                        .forward(request, response);
             } else {
                 mensaje = "No se pudo agregar";
+                request.setAttribute("msg", mensaje);
+                request.getRequestDispatcher("/paginas/crearVenta.jsp")
+                        .forward(request, response);
             }
 
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
+            request.setAttribute("msg", mensaje);
+            request.getRequestDispatcher("/paginas/crearVenta.jsp")
+                    .forward(request, response);
         }
-        request.setAttribute("msg", mensaje);
-            request.getRequestDispatcher(
-                    "/paginas/crearVenta.jsp").
-                    forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

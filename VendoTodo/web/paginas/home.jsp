@@ -35,7 +35,7 @@
                 <%}%>
 
                 <%if (usuarioDto.getCodigoPerfil() == 1 || usuarioDto.getCodigoPerfil() == 3) {%>
-                <a href="<%= request.getContextPath()%>/privado/RealizarDetalleVenta">RealizarVenta     </a>
+                <a href="<%= request.getContextPath()%>/privado/RealizarVenta">RealizarVenta     </a>
                 <br>
                 <%}%>
 
