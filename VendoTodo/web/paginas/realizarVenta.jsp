@@ -148,6 +148,14 @@
 
                     </tr>
                     <% } %>  
+                    <%
+                    Integer totalVenta = (Integer) request.getAttribute("total_venta");
+                    if (totalVenta != null) {%>
+                    <tr>
+                        <td style="text-align: right"><strong>Total pagado:</strong></td>
+                        <td><%=totalVenta%></td>
+                    </tr>
+                    <% } %>  
                 </tbody>
             </table>
             <% } %>

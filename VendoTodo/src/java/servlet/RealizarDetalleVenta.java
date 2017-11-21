@@ -14,6 +14,7 @@ import dto.DetalleVentaDto;
 import dto.ProductoDto;
 import dto.TipoDto;
 import dto.UsuarioDto;
+import dto.VentasDto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -63,6 +64,7 @@ public class RealizarDetalleVenta extends HttpServlet {
             return;
 
         }
+        
         ArrayList<DetalleVentaDto> lista = new DetalleVentaDaoImp().ListarPorVentas(codigoVenta);
         if (!lista.isEmpty()) {
             request.setAttribute("lista", lista);
@@ -70,7 +72,14 @@ public class RealizarDetalleVenta extends HttpServlet {
         request.setAttribute("detalles", new DetalleVentaDaoImp().ListarPorVentas(codigoVenta));
 
         if ("GET".equals(request.getMethod())) {
-
+            
+            ArrayList<VentasDto> listaVentas = new VentasDaoImp().listar();
+            for (VentasDto venta : listaVentas) {
+                if (venta.getCodigoVenta() == codigoVenta) {
+                    request.setAttribute("total_venta", venta.getTotalVenta());
+                    break;
+                }
+            }
             request.getRequestDispatcher(
                     "/paginas/realizarVenta.jsp").
                     forward(request, response);
@@ -106,12 +115,12 @@ public class RealizarDetalleVenta extends HttpServlet {
                         } else {
                             mensaje = "No se pudo agregar";
                         }
-
                     }
                     break;
                 case "Finalizar Venta":
                     if (new VentasDaoImp().actualizarTotal(codigoVenta)) {
                         mensaje = "Venta finalizada";
+                        
                     } else {
                         mensaje = "No se pudo finalizar venta";
                     }
@@ -124,6 +133,14 @@ public class RealizarDetalleVenta extends HttpServlet {
                 request.setAttribute("lista", lista);
             }
 
+
+            ArrayList<VentasDto> listaVentas = new VentasDaoImp().listar();
+            for (VentasDto venta : listaVentas) {
+                if (venta.getCodigoVenta() == codigoVenta) {
+                    request.setAttribute("total_venta", venta.getTotalVenta());
+                    break;
+                }
+            }
             request.setAttribute("msg", mensaje);
             request.getRequestDispatcher(
                     "/paginas/realizarVenta.jsp").

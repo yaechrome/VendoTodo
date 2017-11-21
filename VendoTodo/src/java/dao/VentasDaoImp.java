@@ -160,7 +160,7 @@ public class VentasDaoImp implements VentasDao {
                 VentasDto dto = new VentasDto();
                 dto.setCodigoVendedor(rs.getInt("codigo_vendedor"));
                 dto.setFechaVenta(rs.getDate("fecha_venta"));
-                dto.setTotalVenta(rs.getInt("total"));
+                dto.setTotalVenta(rs.getInt("total_venta"));
                 dto.setCodigoVenta(rs.getInt("codigo_venta"));
                 lista.add(dto);
             }
