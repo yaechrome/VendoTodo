@@ -1,8 +1,12 @@
 
+<%@page import="util.ConstanteUtil"%>
 <%@page import="dto.UsuarioDto"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dto.PerfilDto"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    UsuarioDto usuarioDto = (UsuarioDto) request.getSession().getAttribute(ConstanteUtil.LOGIN_USUARIO);
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -37,6 +41,7 @@
     <body>
         <ul>
             <li><a class="active" href="<%= request.getContextPath()%>/privado/Home">Home</a></li>
+            <li><a class="active"> Usuario conectado: <%=usuarioDto.getNombreUsuario()%></a></li>
             <li style="float:right"><a class="active" href="../paginas/logout.jsp">Salir</a></li>
 
         </ul>

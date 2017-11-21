@@ -21,7 +21,7 @@
     </head>
     <body>
         <ul>
-
+            <li><a class="active"> Usuario conectado: <%=usuarioDto.getNombreUsuario()%></a></li>
             <li style="float:right"><a class="active" href="../paginas/logout.jsp">Salir</a></li>
 
         </ul>
@@ -54,9 +54,7 @@
             <br>
         </div>
 
-        <ul>
-            <li><a class="active"> Usuario conectado: <%=usuarioDto.getNombreUsuario()%></a></li>
-        </ul>
+        
 
            
 

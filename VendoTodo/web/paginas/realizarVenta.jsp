@@ -1,5 +1,7 @@
 
 
+<%@page import="util.ConstanteUtil"%>
+<%@page import="dto.UsuarioDto"%>
 <%@page import="java.util.Map"%>
 <%@page import="dao.ProductoDaoImp"%>
 <%@page import="dto.DetalleVentaDto"%>
@@ -8,6 +10,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    UsuarioDto usuarioDto = (UsuarioDto) request.getSession().getAttribute(ConstanteUtil.LOGIN_USUARIO);
+%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -69,6 +75,7 @@
     <body>
         <ul>
             <li><a class="active" href="<%= request.getContextPath()%>/privado/Home">Home</a></li>
+            <li><a class="active"> Usuario conectado: <%=usuarioDto.getNombreUsuario()%></a></li>
             <li style="float:right"><a class="active" href="../paginas/logout.jsp">Salir</a></li>
 
         </ul>

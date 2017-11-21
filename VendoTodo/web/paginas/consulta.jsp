@@ -1,8 +1,11 @@
+<%@page import="dto.UsuarioDto"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="util.ConstanteUtil"%>
 
-
+<%
+    UsuarioDto usuarioDto = (UsuarioDto) request.getSession().getAttribute(ConstanteUtil.LOGIN_USUARIO);
+%>
 
 <!DOCTYPE html>
 <html>
@@ -15,6 +18,7 @@
     <body>
         <ul>
             <li><a class="active" href="<%= request.getContextPath()%>/privado/Home">Home</a></li>
+            <li><a class="active"> Usuario conectado: <%=usuarioDto.getNombreUsuario()%></a></li>
             <li style="float:right"><a class="active" href="../paginas/logout.jsp">Salir</a></li>
 
         </ul>
