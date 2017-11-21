@@ -31,17 +31,17 @@
             <fieldset style="display: inline-block;">
                 <legend>MENÚ</legend>
                 <%if (usuarioDto.getCodigoPerfil() == 1) {%>
-                <a href="<%= request.getContextPath()%>/privado/AgregarUsuario">Usuario     </a>
+                <a href="<%= request.getContextPath()%>/privado/AgregarUsuario">Mantenedor de Usuarios     </a>
                 <br>
                 <%}%>
 
                 <%if (usuarioDto.getCodigoPerfil() == 1) {%>
-                <a href="<%= request.getContextPath()%>/privado/AgregarProducto">Producto   </a>
+                <a href="<%= request.getContextPath()%>/privado/AgregarProducto">Mantenedor de Productos   </a>
                 <br>
                 <%}%>
 
                 <%if (usuarioDto.getCodigoPerfil() == 1 || usuarioDto.getCodigoPerfil() == 3) {%>
-                <a href="<%= request.getContextPath()%>/privado/RealizarVenta">RealizarVenta     </a>
+                <a href="<%= request.getContextPath()%>/privado/RealizarVenta">Realizar Venta     </a>
                 <br>
                 <%}%>
 

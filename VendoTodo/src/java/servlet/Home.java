@@ -57,8 +57,9 @@ public class Home extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+         request.getRequestDispatcher(HOME_URL_FILE).forward(request, response);
     }
+    
 
     /**
      * Returns a short description of the servlet.
