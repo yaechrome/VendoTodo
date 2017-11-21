@@ -20,6 +20,12 @@
         %>
     </head>
     <body>
+         <ul>
+            <li><a class="active" href="<%= request.getContextPath()%>/privado/Home">Home</a></li>
+            <li style="float:right"><a class="active" href="../paginas/logout.jsp">Salir</a></li>
+
+        </ul>
+        <br><br>
         <h1>Crear Venta</h1>
         <form action="<%= request.getContextPath()%>/privado/RealizarVenta" method="POST">
             <input  class="log-btn" style="width: 100%" type="submit" value="Crear" name="btnCrear" />
