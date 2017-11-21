@@ -71,10 +71,16 @@
                     </tr>
                 </tbody>
             </table><br>
-            <input type="submit" value="Grabar" name="btn" /> 
-            <input type="submit" value="Actualizar" name="btn" />    
-            <input type="submit" value="Mostrar" name="btn" />    
-            <input type="reset" name="reset" value="Limpiar" />
+            <table>
+                    <tr>
+                        <td>
+                            <input type="submit" class="log-btn" value="Grabar" name="btn" /> 
+                            <input type="submit" class="log-btn" value="Actualizar" name="btn" />    
+                            <input type="submit" class="log-btn" value="Mostrar" name="btn" />  
+                            <input type="reset" class="log-btn" name="reset" value="Limpiar" />
+                        </td>
+                    </tr>
+                </table>
         </form> 
 
            <% ArrayList<ProductoDto> lista
@@ -105,8 +111,8 @@
                     <td><%= dto.getNombreProducto()%></td>
                     <td><%= dto.getPrecioProducto()%></td>
                     <td><%= dto.getCodigoTipo()%></td>
-                    <td><button type="submit" value="<%= dto.getCodigoProducto()%>" name="btnEliminar">Eliminar</button></td>
-                    <td><button type="button" onclick='seleccionar(<%= dto.getCodigoProducto()%>,"<%= dto.getNombreProducto().replace("\"", "\\\"")%>",<%= dto.getPrecioProducto()%>,<%= dto.getCodigoTipo()%>)'>Seleccionar</button></td>
+                    <td><button  class="log-btn" type="submit" value="<%= dto.getCodigoProducto()%>" name="btnEliminar">Eliminar</button></td>
+                    <td><button  class="log-btn" type="button" onclick='seleccionar(<%= dto.getCodigoProducto()%>,"<%= dto.getNombreProducto().replace("\"", "\\\"")%>",<%= dto.getPrecioProducto()%>,<%= dto.getCodigoTipo()%>)'>Seleccionar</button></td>
                     
                 </tr>
                 <% } %>  

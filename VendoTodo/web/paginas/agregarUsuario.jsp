@@ -92,10 +92,16 @@
                         </tr>
                     </tbody>
                 </table><br>
-                <input type="submit" class="log-btn" value="Grabar" name="btn" /> 
-                <input type="submit" class="log-btn" value="Actualizar" name="btn" />    
-                <input type="submit" class="log-btn" value="Mostrar" name="btn" />  
-                <input type="reset" class="log-btn" name="reset" value="Limpiar" />
+                <table>
+                    <tr>
+                        <td>
+                            <input type="submit" class="log-btn" value="Grabar" name="btn" /> 
+                            <input type="submit" class="log-btn" value="Actualizar" name="btn" />    
+                            <input type="submit" class="log-btn" value="Mostrar" name="btn" />  
+                            <input type="reset" class="log-btn" name="reset" value="Limpiar" />
+                        </td>
+                    </tr>
+                </table>
             </div>
 
         </form>
@@ -138,10 +144,10 @@
                         <td><%= dto.getCorreoUsuario()%></td>
                         <td><%= dto.getFechaNacimiento()%></td>
                         <td><%= dto.getCodigoPerfil()%></td>
-                        <td><button type="submit" value="<%= dto.getIdUsuario()%>" name="btnEliminar">Eliminar</button></td>
-                        <td><button type="button" onclick='seleccionar(<%=dto.getIdUsuario()%>, "<%=dto.getLoginUsuario().replace("\"", "\\\"")%>",
-                                    "<%=dto.getNombreUsuario()%>", "<%=dto.getApellidoUsuario()%>", "<%=dto.getCorreoUsuario().replace("\"", "\\\"")%>",
-                                    "<%=dto.getFechaNacimiento().toString()%>",<%=dto.getCodigoPerfil()%>)'>Seleccionar</button></td>
+                        <td><button  class="log-btn" type="submit" value="<%= dto.getIdUsuario()%>" name="btnEliminar">Eliminar</button></td>
+                        <td><button class="log-btn"  type="button" onclick='seleccionar(<%=dto.getIdUsuario()%>, "<%=dto.getLoginUsuario().replace("\"", "\\\"")%>",
+                                        "<%=dto.getNombreUsuario()%>", "<%=dto.getApellidoUsuario()%>", "<%=dto.getCorreoUsuario().replace("\"", "\\\"")%>",
+                                        "<%=dto.getFechaNacimiento().toString()%>",<%=dto.getCodigoPerfil()%>)'>Seleccionar</button></td>
 
                     </tr>
                     <% } %>  
@@ -152,9 +158,9 @@
         <% }%>               
 
         <% String mensaje = (String) request.getAttribute("msg");
-             if (mensaje != null) {%>
+            if (mensaje != null) {%>
         <script>
-                alert("<%= mensaje%>");
+            alert("<%= mensaje%>");
         </script>
         <% }%>
 

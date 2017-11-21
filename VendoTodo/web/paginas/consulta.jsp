@@ -36,7 +36,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <input type="submit" value="Consultar" name="btnConsultar" />
+                    <input type="submit" value="Consultar" name="btnConsultar" class="log-btn" />
                 </div>
         </div>
 
@@ -52,7 +52,7 @@
     <div style="text-align: center;"> 
         <form action="<%= request.getContextPath()%>/privado/ConsultaVenta" method="POST">
             <h5> Ingrese N° de venta: </h5><input type="number" name="txtVenta" value="" />
-            <input type="submit" value="Consultar" name="btnConsultarVentas" />
+            <input class="log-btn" type="submit" value="Consultar" name="btnConsultarVentas" />
             <br>
 
         </form>

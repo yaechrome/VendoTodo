@@ -15,14 +15,21 @@
         <%
             Integer codigoVenta = (Integer) request.getAttribute("codigo_venta");
             if (codigoVenta != null) {%>
-            <meta http-equiv="refresh" content="0; url=<%= request.getContextPath()%>/privado/RealizarDetalleVenta?codigo_venta=<%=codigoVenta%>" />
-            <%}
+        <meta http-equiv="refresh" content="0; url=<%= request.getContextPath()%>/privado/RealizarDetalleVenta?codigo_venta=<%=codigoVenta%>" />
+        <%}
         %>
     </head>
     <body>
         <h1>Crear Venta</h1>
         <form action="<%= request.getContextPath()%>/privado/RealizarVenta" method="POST">
-            <input  class="log-btn" style="width: 100%" type="submit" value="Crear" name="btnCrear" />
+            <table>
+                <tr>
+                    <td>
+                        <input  class="log-btn"  type="submit" value="Crear" name="btnCrear" />
+                    </td>
+                </tr>
+            </table>
+
         </form>
     </body>
 </html>
